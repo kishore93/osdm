@@ -27,4 +27,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 ## before running
 
-in heat map component please remove 160 line and paste it once compiling is done.
+in heat map component please remove 160 line and paste it once compiling is done. ...
