@@ -157,6 +157,7 @@ export class HeatMapComponent implements OnInit {
     .attr("transform", "translate(" + 5 + "," + 20 + ")");
 
     var myColor = d3.scaleLinear().domain([minVal,maxVal])
+    //remove this line and add after compiling
     .range(['#fff','red']);
                   
   
