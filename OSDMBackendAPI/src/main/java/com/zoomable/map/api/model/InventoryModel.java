@@ -6,8 +6,6 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document(collection = "Inventory")
 public class InventoryModel {
 
-	
-
 	@Field(value = "Region")
 	private String region;
 

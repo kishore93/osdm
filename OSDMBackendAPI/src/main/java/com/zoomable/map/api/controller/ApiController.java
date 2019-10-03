@@ -3,6 +3,8 @@ package com.zoomable.map.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zoomable.map.api.model.InventoryModel;
+import com.zoomable.map.api.repository.ApiRepository;
 import com.zoomable.map.api.service.ApiService;
 
 @RestController
@@ -19,28 +22,77 @@ public class ApiController {
 
 	@Autowired
 	private ApiService service;
-	
-	@GetMapping(value = "/top/{limit}" , produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<InventoryModel> sortTopTenRecordsByCriteria(
-				@PathVariable(name = "limit", required = true) final int limit,
-				@RequestParam(name = "region", required = false) final String region,
-				@RequestParam(name = "state", required = false) final String state,
-				@RequestParam(name = "plantCode", required = false) final String plantCode,
-				@RequestParam(name = "materialNumber", required = false) final String materialNumber
-			)
-	{
-		return service.fetchRecordsByCriteria(region, state, plantCode, materialNumber, true, limit);
+
+	@Autowired
+	private ApiRepository repository;
+
+	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<InventoryModel> getAllRecords() {
+		return repository.findAll();
 	}
-	
-	@GetMapping(value = "/all" , produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<InventoryModel> sortRecordsByCriteria(
-				@RequestParam(name = "region", required = false) final String region,
-				@RequestParam(name = "state", required = false) final String state,
-				@RequestParam(name = "plantCode", required = false) final String plantCode,
-				@RequestParam(name = "materialNumber", required = false) final String materialNumber
-			)
-	{
-		return service.fetchRecordsByCriteria(region, state, plantCode, materialNumber, false, -1);
+
+	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE, params = "region")
+	public List<InventoryModel> getAllRecordsByRegion(@RequestParam final String region) {
+		return repository.findByRegion(region);
 	}
-	
+
+	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE, params = { "region", "state" })
+	public List<InventoryModel> getAllRecordsByRegionAndState(@RequestParam final String region,
+			@RequestParam final String state) {
+		return repository.findByRegionAndState(region, state);
+	}
+
+	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE, params = { "region", "state",
+			"plantCode" })
+	public List<InventoryModel> getAllRecordsByRegionAndStateAndPlantCode(@RequestParam final String region,
+			@RequestParam final String state, @RequestParam final String plantCode) {
+		return repository.findByRegionAndStateAndPlantCode(region, state, plantCode);
+	}
+
+	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE, params = { "region", "state", "plantCode",
+			"materialNo" })
+	public List<InventoryModel> getAllRecordsByRegionAndStateAndPlantCode(@RequestParam final String region,
+			@RequestParam final String state, @RequestParam final String plantCode,
+			@RequestParam final String materialNo) {
+		return repository.findByRegionAndStateAndPlantCodeAndMaterialNo(region, state, plantCode, materialNo);
+	}
+
+	@GetMapping(value = "/top/{limit}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<InventoryModel> getRecordsByLimit(@PathVariable int limit) {
+		return repository.findAll(PageRequest.of(1, limit)).getContent();
+	}
+
+	@GetMapping(value = "/top/{limit}", params = { "region" }, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<InventoryModel> getRecordsByLimit(@PathVariable int limit, @RequestParam String region) {
+		return repository.findTopLimitByRegion(region, PageRequest.of(1, limit, new Sort(Sort.Direction.ASC, "value")));
+	}
+
+	@GetMapping(value = "/top/{limit}", params = { "region", "state" }, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<InventoryModel> getRecordsByLimit(@PathVariable int limit, @RequestParam String region,
+			@RequestParam String state) {
+		return repository.findTopLimitByRegionAndState(region, state,
+				PageRequest.of(1, limit, new Sort(Sort.Direction.ASC, "value")));
+	}
+
+	@GetMapping(value = "/top/{limit}", params = { "region", "state",
+			"plantCode" }, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<InventoryModel> getRecordsByLimit(@PathVariable int limit, @RequestParam String region,
+			@RequestParam String state, @RequestParam String plantCode) {
+		return repository.findTopLimitByRegionAndStateAndPlantCode(region, state, plantCode,
+				PageRequest.of(1, limit, new Sort(Sort.Direction.ASC, "value")));
+	}
+
+	@GetMapping(value = "/top/{limit}", params = { "region", "state", "plantCode",
+			"materialNo" }, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<InventoryModel> getRecordsByLimit(@PathVariable int limit, @RequestParam String region,
+			@RequestParam String state, @RequestParam String plantCode, @RequestParam String materialNo) {
+		return repository.findTopLimitByRegionAndStateAndPlantCodeAndMaterialNo(region, state, plantCode, materialNo,
+				PageRequest.of(1, limit, new Sort(Sort.Direction.ASC, "value")));
+	}
+
+	@GetMapping(value = "/material-numbers", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<String> retrieveDistinctMaterialNumbers() {
+		return service.retrieveDistinctMaterialNumbers();
+	}
+
 }

@@ -1,25 +1,25 @@
 spring:
   application:
-    name: zoomable-api
-  profile:
-    active: dev
+    name: osdm-spring-boot-app
+  profiles:
+    active: local
 management:
   endpoints:
     web:
       exposure:
-        include: health, info, metrics, loggers
-
+        include: health, info, metrics, loggers, beans
 ---
-
+spring:
+  profile: local  data:    mongodb:
+      database: OSDM
+      uri: mongodb+srv://osdmrwuser:FsVfSuiP6RYccKoN@odsm-2qvoc.mongodb.net/OSDM?retryWrites=true&w=majority
+server:  port: 9100
+---
 spring:
   profile: dev
-mongo:
-  host: odsm-2qvoc.mongodb.net
-  port: 27017
-  authentication-database: OSDM
-  username: nmukara
-  password: Mar$2019
-
-server:  port: 9100
-
----
+  data:
+    mongodb:
+      database: OSDM
+      uri: mongodb+srv://osdmrwuser:FsVfSuiP6RYccKoN@odsm-2qvoc.mongodb.net/OSDM?retryWrites=true&w=majority
+server:
+  port: 9100
