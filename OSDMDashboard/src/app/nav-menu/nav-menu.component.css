@@ -1,0 +1,152 @@
+.scct{
+    width: 100%;
+    margin:0 auto;
+    display: inline-block;
+}
+#nav{
+    width: 100%;
+    margin: 0 auto;
+    background-color:#72a4d0;
+    color: white;
+    display: inline-block;
+    border-bottom: 1px solid #a59b9b;
+}
+#menu{
+    width: 20%;
+    height: 100vh;
+    float: left;    
+    border-right: 1px solid #a59b9b;
+}
+.right-panel{
+    display: inline-block;
+    width: 80%;
+    margin: 0 auto;
+}
+.scctText{
+    display: inline-block;
+    position: relative;
+    left: 25%; 
+}
+.myclass {
+    color: black;
+    font-size: 20px;
+}
+.firstmatpanel{
+    padding: 0 10%;
+    background-color: #ffff;;
+    font-weight: bold;
+    padding: 0;
+}
+mat-accordion{
+    width:10% !important;
+}
+mat-expansion-panel {
+    padding:2% !important;
+    background-color: #ffff;;
+}
+.mat-expansion-panel-content{
+    padding:0;
+}
+.btn{
+    background-color: #72a4d0;
+    color: #000;
+    font-weight: bold;
+    font-size: 12px;
+    border: 1px solid #adadad;
+}
+mat-form-field{
+    width: 100%;
+}
+.form-attr {
+    max-width: 100% !important;
+}
+.borderless{
+    border: none;
+}
+
+.excessbutton{
+    line-height: normal;
+}
+.excessUnit{
+    padding: 4.5% 5.5%;
+}
+.excessValue{
+    padding: 4.5% 4.25%;
+}
+.days{
+    padding: 4.5% 5.5%;;
+    margin-left: -2%;
+}
+.obsolClass{
+    
+    width: 76%;
+    padding: 8%;
+}
+button:hover{ 
+    background: #007fab !important;
+    color: #fff !important;
+    border: 1px solid #007fab !important;
+}
+.myClass{
+    border: 2px solid #007fab;
+    background: #007fab!important;
+    color: #fff;
+}
+
+.button-group {
+    width: 92%;
+    margin: 0 auto;
+    position: relative;
+    display: inline-block;
+    left: 0%;
+    padding-top: 2%;
+}
+.empty{
+    margin-top: 20%;
+}
+#div1{
+    width:16%;
+    display: inline-block;
+}
+
+.button-group button:nth-child(1){
+    margin-right:3%;
+}
+.button-group button:nth-child(2){
+    margin-right:3%;
+}
+.button-group button {
+    width: 30%;
+    color:#000;
+    font-weight: bold;
+    border: 1px solid #adadad;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.center2{
+    padding-left: 38%;
+}
+.generateHeatmap{
+    padding: 10px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+.example-full-width .mat-form-field-infix{
+    padding:0 !important;
+}
+.sixtydays{
+    margin-left: 56.5%;
+}
+.obsoluteclass{
+    position: relative;
+    left: -11.5%;
+}
+.groupbuttons{
+    position: relative;
+    left: 56%;
+    top: -118px;
+}
+
+
