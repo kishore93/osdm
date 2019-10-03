@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "spring.profile",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.profile'"
+  },
+  {
+    "name": "mongo",
+    "type": "java.util.Map",
+    "description": "A description for 'mongo'"
+  }
+]}

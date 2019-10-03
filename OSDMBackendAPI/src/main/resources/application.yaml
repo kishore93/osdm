@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: zoomable-api
+  profile:
+    active: dev
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, loggers
+
+---
+
+spring:
+  profile: dev
+mongo:
+  host: odsm-2qvoc.mongodb.net
+  port: 27017
+  authentication-database: OSDM
+  username: nmukara
+  password: Mar$2019
+
+server:  port: 9100
+
+---
