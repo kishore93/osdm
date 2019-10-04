@@ -67,20 +67,26 @@ mat-form-field{
 .excessbutton{
     line-height: normal;
 }
-.excessUnit{
-    padding: 4.5% 5.5%;
+.excessUnit, .excessValue{
+    padding: 2% 0;
+    font-size: 10px;
+    font-weight: 700;
 }
 .excessValue{
-    padding: 4.5% 4.25%;
+    margin-top: 85%;
 }
 .days{
-    padding: 4.5% 5.5%;;
-    margin-left: -2%;
+    padding: 2% 5%;
+    font-size: 10px;
+    font-weight: 700;
 }
 .obsolClass{
-    
-    width: 76%;
-    padding: 8%;
+    width: 100%;
+    padding: 8% 4%;
+    font-size: 10px;
+    font-weight: 700;
+    margin-left: 0;
+    display: inline-block;
 }
 button:hover{ 
     background: #007fab !important;
@@ -136,6 +142,30 @@ button:hover{
 .example-full-width .mat-form-field-infix{
     padding:0 !important;
 }
+.eoinventory-click{
+    width: 100%;
+    display: inline-block;
+}
+.eoinventory-click button:nth-child(1){
+    width: 44%;
+    padding: 5%;
+    float: left;
+    display: inline-block;
+}
+.eoinventory-click button:nth-child(2){
+    width: 50%;
+    padding: 5%;
+    float: right;
+    margin-right: 0;
+    margin-left: 0;
+    display: inline-block;
+}
+#eoinventory, #demand{
+    width:98%;
+}
+#production-order{
+    width:100%;
+}
 .sixtydays{
     margin-left: 56.5%;
 }
@@ -143,10 +173,13 @@ button:hover{
     position: relative;
     left: -11.5%;
 }
-.groupbuttons{
-    position: relative;
-    left: 56%;
-    top: -118px;
+
+.maindiv{
+    width: 700px;
+}
+.col-md-4{
+    padding-left: 0;
+    padding-right: 0;
 }
 
 

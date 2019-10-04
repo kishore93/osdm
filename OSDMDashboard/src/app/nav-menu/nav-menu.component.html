@@ -17,7 +17,6 @@
                             </mat-option>
                         </mat-autocomplete>
                     </mat-form-field>  
-                
                 </div>
             </div>
             <div class="row">
@@ -65,12 +64,61 @@
 
 
     <div class="right-panel container-fluid">
-        <div class="row form-group button-group">
+        <div class="row maindiv" style="margin-top: 2%;">
+            <div class="col-md-4">
+                <button (click)="isClicked = !isClicked" [class.myClass]="isClicked" mdbBtn type="button" id="eoinventory" color="light" (click)="callfun()" rounded="true" mdbWavesEffect  >E&O inventory</button>
+                <div class="eoinventory-click" *ngIf="show || show5">
+                    <button (click)="isClicked17 = !isClicked17" [class.myClass]="isClicked17" mdbBtn type="button" color="light"rounded="true" mdbWavesEffect (click)="callfun1()" >Excess</button>
+                    <button (click)="isClicked18 = !isClicked18" [class.myClass]="isClicked18" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect (click)="callfun2()">Obsolete</button>
+                </div>
+                <div style="width: 100%">
+                    <div style="width:50%;display: inline-block;float:left;">
+                        <div style="width:50%;display: inline-block;float: left;" *ngIf="show1">
+                            <button class="excessUnit" (click)="isClicked3 = !isClicked3" [class.myClass]="isClicked3" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect (click)="excessUnitMethod()">Excess (unit)</button>
+                         
+                            <button class="excessValue" (click)="isClicked6 = !isClicked6" [class.myClass]="isClicked6" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect (click)="excessValueMethod()">Excess (value)</button>
+                        </div>
+                        <div style="width:50%;display: inline-block;" class="day-div">
+                            <div class="groupbuttons" *ngIf="isClicked3 || isClicked6">
+                                <div>
+                                    <button class="days" (click)="isClicked4 = !isClicked4" [class.myClass]="isClicked4" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>30 days</button>
+                                </div>
+                                <div>
+                                    <button class="days" (click)="isClicked5 = !isClicked5" [class.myClass]="isClicked5" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>60 days</button>
+                                </div>
+                                <div>
+                                    <button class="days" (click)="isClicked14 = !isClicked14" [class.myClass]="isClicked14" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>90 days</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div style="width:50%;display: inline-block;">
+                        <div class="form-group" *ngIf="show2">
+                            <div>
+                                <button class="obsolClass" (click)="isClicked8 = !isClicked8" [class.myClass]="isClicked8" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>Obsolete Qty</button>
+                            </div>
+                            <div>
+                                <button class="obsolClass" (click)="isClicked9 = !isClicked9" [class.myClass]="isClicked9" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>Obsolete value</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-md-4">
+                <button id="demand" (click)="isClicked1 = !isClicked1" [class.myClass]="isClicked1" [style.background-color]="toggle ? 'green' : 'red'" (click)="callfun5()" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>Demand</button>
+            </div>
+            <div class="col-md-4">
+                <button id="production-order" (click)="isClicked2 = !isClicked2" [class.myClass]="isClicked2" [style.background-color]="toggle ? 'green' : 'red'" (click)="productionOrder()" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>Production Order</button>
+            </div>
+        </div>
+        <!-- <div class="row form-group button-group">
             <button (click)="isClicked = !isClicked" [class.myClass]="isClicked" mdbBtn type="button" id="eoinventory" color="light" (click)="callfun()" rounded="true" mdbWavesEffect  >E&O inventory</button>
             <button (click)="isClicked1 = !isClicked1" [class.myClass]="isClicked1" [style.background-color]="toggle ? 'green' : 'red'" (click)="callfun5()" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>Demand</button>
             <button (click)="isClicked2 = !isClicked2" [class.myClass]="isClicked2" [style.background-color]="toggle ? 'green' : 'red'" (click)="productionOrder()" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>Production Order</button>
-        </div>
-        <div  class="row center1" *ngIf="show || show5">
+        </div> -->
+        <!-- <div  class="row center1" *ngIf="show || show5">
         <div class="col-lg-5">
                 <div id="div1">
                     <button style="width: 246%;" (click)="isClicked17 = !isClicked17" [class.myClass]="isClicked17" mdbBtn type="button" color="light"rounded="true" mdbWavesEffect (click)="callfun1()" >Excess</button>
@@ -97,7 +145,7 @@
             </div>
         </div>
             
-            <!-- <table>
+            <table>
                 <tbody>
                     <tr>
                       <td><button (click)="isClicked3 = !isClicked3" [class.myClass]="isClicked3" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>Exces1s (unit)</button> </td>
@@ -116,7 +164,7 @@
                      </tr>
                 </tbody>
                 </table> -->
-        <div class="col-lg-3 obsoluteclass">
+        <!-- <div class="col-lg-3 obsoluteclass">
             <div>
                 <button (click)="isClicked18 = !isClicked18" [class.myClass]="isClicked18" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect (click)="callfun2()">Obsolete</button>
             </div>
@@ -128,6 +176,9 @@
                 <div>
                     <button class="obsolClass" (click)="isClicked9 = !isClicked9" [class.myClass]="isClicked9" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>Obsolete value</button>
                 </div>
+                </div>
+            </div> -->
+        </div>
                 <!-- <table>
                 <tbody>
                     <tr>
@@ -138,9 +189,7 @@
                     </tr>
                 </tbody>
                 </table> -->
-            </div>
-        </div>
-    </div> 
+        
     <div class="heatmapcls" *ngIf="newArray1; else loggedOut">
         <app-heat-map [message]="newArray1">loading please wait</app-heat-map>
     </div>

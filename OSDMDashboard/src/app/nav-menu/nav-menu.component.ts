@@ -76,12 +76,12 @@ export class NavMenuComponent implements OnInit {
       this.isClicked=false;
       this.show5 = !this.show5;
       this.show =false;
-      this.isClicked3 = false;
+      this.isClicked3 = true;
       this.isClicked4 = false;
       this.isClicked5 = false;
       this.isClicked6 = false;
       this.isClicked7 = false;
-      this.isClicked8 = false;
+      this.isClicked8 = true;
       this.isClicked9 = false;
       this.isClicked17=false;
       this.isClicked18=false;
@@ -89,12 +89,19 @@ export class NavMenuComponent implements OnInit {
       }
    callfun1() {
     this.show1 = !this.show1;
-    this.isClicked3=false;
+    this.isClicked3=!this.isClicked3;
     this.isClicked6=false;
+    this.show2=false;
+    this.isClicked18=false
    }
    //obsolute button click function
    callfun2() {
     this.show2 = !this.show2;
+    this.show1=false;
+    this.isClicked3=false;
+    this.isClicked6=false;
+    this.isClicked17=false;
+    this.isClicked8=true
    }
    productionOrder(){
     this.show5 = false;
