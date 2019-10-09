@@ -8,13 +8,21 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import com.zoomable.map.api.model.InventoryModel;
 import com.zoomable.map.api.repository.ApiRepository;
+import com.zoomable.map.api.util.Util;
 
 @Service
 public class ApiService {
 
+	@Autowired
+	MongoTemplate template;
+	
 	@Autowired
 	ApiRepository repository;
 	
@@ -75,13 +83,30 @@ public class ApiService {
 		return output;
 	}
 	
-	public List<String> retrieveDistinctMaterialNumbers() {
+	public List<String> retrieveDistinctMaterialNumbers(String region, String state, String plantCode) {
+		
 		Set<String> materialNos = new HashSet<>();
-		repository.findAll(Sort.by(Sort.Direction.ASC, "MaterialNo"))
+		
+		Query query = new Query();
+		
+		if(Util.isNullOrEmptyorAll(region)) {
+			query.addCriteria(Criteria.where("Region").is(region));
+		}
+		
+		if(Util.isNullOrEmptyorAll(state)) {
+			query.addCriteria(Criteria.where("State").is(state));
+		}
+		
+		if(Util.isNullOrEmptyorAll(plantCode)) {
+			query.addCriteria(Criteria.where("PlantCode").is(plantCode));
+		}
+				
+		template.find(query, InventoryModel.class)
 					.parallelStream()
 					.forEach(model -> {
 						materialNos.add(model.getMaterialNo());
 					});
+				
 		List<String> output = new ArrayList<>(materialNos);
 		
 		output.sort(new Comparator<String>() {
