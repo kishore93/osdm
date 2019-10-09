@@ -255,7 +255,7 @@ export class HeatMapComponent implements OnInit {
   .on("mouseover", function(){return tooltip.style("visibility", "visible");})
   .on("click", function(d){return tooltip.style("top", (d3.event.pageY-10)+"px")
     .style("left",(d3.event.pageX+10)+"px")
-    .text("Material Desc: "+d["materialDescription"]+" Demand 30 Days :"+d["demandFor30Days"]+" Demand 60 Days : "+d["demandFor60Days"]+" Demand 90 Days:"+d["demandFor90Days"])
+    .text("PlantCode: "+d["plantCode"]+"Material Desc: "+d["materialDescription"]+" Demand 30 Days :"+d["demandFor30Days"]+" Demand 60 Days : "+d["demandFor60Days"]+" Demand 90 Days:"+d["demandFor90Days"])
     .style("padding","1%")
     .style("opacity","1");})
   
