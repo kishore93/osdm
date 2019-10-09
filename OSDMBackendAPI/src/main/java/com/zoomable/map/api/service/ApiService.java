@@ -23,7 +23,7 @@ public class ApiService {
 		repository.findAll(Sort.by(Sort.Direction.ASC, "Region"))
 					.parallelStream()
 					.forEach(model -> {
-						regions.add(model.getMaterialNo());
+						regions.add(model.getRegion());
 					});
 		List<String> output = new ArrayList<>(regions);
 		
@@ -42,7 +42,7 @@ public class ApiService {
 		repository.findAll(Sort.by(Sort.Direction.ASC, "State"))
 					.parallelStream()
 					.forEach(model -> {
-						states.add(model.getMaterialNo());
+						states.add(model.getState());
 					});
 		List<String> output = new ArrayList<>(states);
 		
@@ -61,7 +61,7 @@ public class ApiService {
 		repository.findAll(Sort.by(Sort.Direction.ASC, "PlantCode"))
 					.parallelStream()
 					.forEach(model -> {
-						plantCodes.add(model.getMaterialNo());
+						plantCodes.add(model.getPlantCode());
 					});
 		List<String> output = new ArrayList<>(plantCodes);
 		
