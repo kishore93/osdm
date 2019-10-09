@@ -33,6 +33,7 @@ export class HeatMapComponent implements OnInit {
     if(this.message){  
       this.myData.getFiltered(this.message).subscribe(
         data => {
+          console.log(data)
           this.main(data);
         },
         (err: HttpErrorResponse) => {
@@ -115,8 +116,6 @@ export class HeatMapComponent implements OnInit {
     var loopcount=2
     var loopcount1=0
     var count1=0;
-    
-    console.log(data.length);
     if(data.length%5==0){
       y=height/10;
       x=width/5;
@@ -178,7 +177,6 @@ export class HeatMapComponent implements OnInit {
     .enter()
     .append("g")
     .attr("transform", function(d, i) {
-      console.log(count);
       if(count==0 && modx2==0){
         if((dx+x)<=width){
           
