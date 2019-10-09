@@ -74,7 +74,7 @@ public class ApiController {
 
 	@GetMapping(value = "/top/{limit}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<InventoryModel> getRecordsByLimit(@PathVariable int limit) {
-		return repository.findAll(PageRequest.of(1, limit)).getContent();
+		return repository.findAll(PageRequest.of(1, limit, new Sort(Sort.Direction.DESC, "value"))).getContent();
 	}
 
 	@GetMapping(value = "/top/{limit}", params = { "region" }, produces = MediaType.APPLICATION_JSON_VALUE)
