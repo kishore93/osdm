@@ -35,6 +35,21 @@ public class ApiController {
 	public List<InventoryModel> getAllRecordsByRegion(@RequestParam final String region) {
 		return repository.findByRegion(region);
 	}
+	
+	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE, params = "state")
+	public List<InventoryModel> getAllRecordsByState(@RequestParam final String state) {
+		return repository.findByState(state);
+	}
+	
+	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE, params = "plantCode")
+	public List<InventoryModel> getAllRecordsByPlantCode(@RequestParam final String plantCode) {
+		return repository.findByPlantCode(plantCode);
+	}
+	
+	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE, params = "materialNo")
+	public List<InventoryModel> getAllRecordsByMaterialNo(@RequestParam final String materialNo) {
+		return repository.findByMaterialNo(materialNo);
+	}
 
 	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE, params = { "region", "state" })
 	public List<InventoryModel> getAllRecordsByRegionAndState(@RequestParam final String region,
@@ -90,9 +105,26 @@ public class ApiController {
 				PageRequest.of(1, limit, new Sort(Sort.Direction.ASC, "value")));
 	}
 
+	@GetMapping(value = "/regions", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<String> retrieveDistinctRegions() {
+		return service.retrieveDistinctRegions();
+	}
+	
+	@GetMapping(value = "/states", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<String> retrieveDistinctStates() {
+		return service.retrieveDistinctStates();
+	}
+	
+	@GetMapping(value = "/plant-codes", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<String> retrieveDistinctPlantCodes() {
+		return service.retrieveDistinctPlantCodes();
+	}
+	
 	@GetMapping(value = "/material-numbers", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<String> retrieveDistinctMaterialNumbers() {
 		return service.retrieveDistinctMaterialNumbers();
 	}
+	
+	
 
 }

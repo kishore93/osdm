@@ -14,6 +14,12 @@ import com.zoomable.map.api.model.InventoryModel;
 public interface ApiRepository extends MongoRepository<InventoryModel, ObjectId> {
 
 	public List<InventoryModel> findByRegion(String region);
+	
+	public List<InventoryModel> findByState(String state);
+	
+	public List<InventoryModel> findByPlantCode(String plantCode);
+	
+	public List<InventoryModel> findByMaterialNo(String materialNo);
 
 	public List<InventoryModel> findByRegionAndState(String region, String state);
 
