@@ -12,7 +12,7 @@
                         <mat-placeholder class="myclass">materialNo</mat-placeholder>
                         <input (keyup)="onKey($event.target.value)" type="text" class="form-control" matInput formControlName="materialNo" [matAutocomplete]="auto">
                         <mat-autocomplete #auto="matAutocomplete">
-                            <mat-option *ngFor="let option1 of options" [value]="option1">
+                            <mat-option *ngFor="let option1 of materialNumbers" [value]="option1">
                             {{option1}}
                             </mat-option>
                         </mat-autocomplete>
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <br>
-                <button *ngIf="f.plantCode?.value || f.materialNo.value" class="btn generateHeatmap" (click)="servicehit()">Generate HeatMap</button> 
+                <button class="btn generateHeatmap" (click)="servicehit()">Generate HeatMap</button> 
             </form>
         </div>
     </div>
@@ -178,6 +178,12 @@
                 </div>
                 </div>
             </div> -->
+            <div class="heatmapcls" *ngIf="newArray1; else loggedOut">
+                <app-heat-map [message]="newArray1">loading please wait</app-heat-map>
+            </div>
+            <ng-template #loggedOut>
+                <app-heat-map  [message]="top50">loading please wait</app-heat-map>
+            </ng-template>
         </div>
                 <!-- <table>
                 <tbody>
@@ -190,12 +196,7 @@
                 </tbody>
                 </table> -->
         
-    <div class="heatmapcls" *ngIf="newArray1; else loggedOut">
-        <app-heat-map [message]="newArray1">loading please wait</app-heat-map>
-    </div>
-    <ng-template #loggedOut>
-        <app-heat-map  [message]="top50">loading please wait</app-heat-map>
-    </ng-template>
+    
      
 </div>
     <!-- <div>

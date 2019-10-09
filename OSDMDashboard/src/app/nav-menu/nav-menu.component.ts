@@ -10,6 +10,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material';
 })
 export class NavMenuComponent implements OnInit {
   public myForm: FormGroup;
+  materialNumbers: string[] = [];
   constructor(private fb: FormBuilder,public myData: HeatmapDataService) { }
   showAlertDialog:boolean;
   mydata: Array<any>;
@@ -113,6 +114,19 @@ export class NavMenuComponent implements OnInit {
  
   ngOnInit() {
     this.showAlertDialog=true
+    //here use uniqueRecords methods for displaying the data 
+    this.myData.uniqueRecords().subscribe(
+      data => {
+        this.materialNumbers=data as string [];
+        // this.mydata = data as string [];	 // FILL THE ARRAY WITH DATA.
+        //   this.dataLoad(this.mydata)
+      
+      },
+      (err: HttpErrorResponse) => {
+        console.log("am error")
+        console.log (err.message);
+      }
+    )
     this.myData.getData().subscribe(
     data => {
       this.mydata = data as string [];	 // FILL THE ARRAY WITH DATA.
@@ -139,15 +153,15 @@ export class NavMenuComponent implements OnInit {
       this.region.add(entry.region);
       
   }
-  this.options1=this.options
+  this.options1=this.materialNumbers
   }
   search(value: string) { 
     let filter = value.toLowerCase();
-     this.options=this.options1.filter(option => option.toLowerCase().startsWith(filter));
-     return this.options
+     this.materialNumbers=this.options1.filter(option => option.toLowerCase().startsWith(filter));
+     return this.materialNumbers
   }
   onKey(value) { 
-    this.options = this.search(value);
+    this.materialNumbers = this.search(value);
     }
   
   methodForStates(event: MatAutocompleteSelectedEvent){
@@ -175,6 +189,7 @@ export class NavMenuComponent implements OnInit {
     this.divshow = false;
     this.newArray1=null
     if(this.myForm.controls.materialNo.value){
+      console.log(this.myForm.controls.materialNo.value)
       this.newArray1=["materialNo",this.myForm.controls.materialNo.value]
     }
     if(this.myForm.controls.plantCode.value){

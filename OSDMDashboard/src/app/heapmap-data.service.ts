@@ -11,10 +11,14 @@ data:objectClass;
   setData(mydata) {
     this.data=mydata
    }
-   
+  //for all material numbers
   getData(){
     return this.http.get('http://localhost:9100/api/v1/all');
   }
+  uniqueRecords(){
+    return this.http.get('http://localhost:9100/api/v1/material-numbers');
+  }
+  //top records
   getDataForTop(){
     return this.http.get('http://localhost:9100/api/v1/top/50');
   }
@@ -22,10 +26,12 @@ data:objectClass;
     let params = new HttpParams();
     if(message[0]=="plantCode"){
       params = params.set("plantCode", message[1]);
+      console.log(params);
       return this.http.get('http://localhost:9100/api/v1/top/50?',{params: params});
     }
     else if(message[0]=="materialNo"){
       params = params.set("materialNumber", message[1]);
+      console.log(params);
       return this.http.get('http://localhost:9100/api/v1/top/50?',{params: params});
     }
   }

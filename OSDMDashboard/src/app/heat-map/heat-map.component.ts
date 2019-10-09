@@ -2,7 +2,7 @@ import { Component, OnInit,Input, SimpleChanges } from '@angular/core';
 import * as d3 from 'd3'; 
 import { HeatmapDataService } from '../heapmap-data.service';
 
-import { ChangeDetectionStrategy } from '@angular/core';
+
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -26,10 +26,10 @@ export class HeatMapComponent implements OnInit {
     check: boolean;
     showAlertDialog: boolean = false;
     ngOnInit(){
-      console.log("am in")
+      
     }
   ngOnChanges(changes: SimpleChanges){
-    console.log(this.message)
+    
     if(this.message){  
       this.myData.getFiltered(this.message).subscribe(
         data => {
