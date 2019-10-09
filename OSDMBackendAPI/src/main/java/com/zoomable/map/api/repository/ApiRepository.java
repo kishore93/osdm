@@ -30,6 +30,15 @@ public interface ApiRepository extends MongoRepository<InventoryModel, ObjectId>
 
 	@Query(value = "{'Region' : ?0}", sort = "{'value':1}")
 	public List<InventoryModel> findTopLimitByRegion(String region, PageRequest pageRequest);
+	
+	@Query(value = "{'State' : ?0}", sort = "{'value':1}")
+	public List<InventoryModel> findTopLimitByState(String state, PageRequest pageRequest);
+	
+	@Query(value = "{'PlantCode' : ?0}", sort = "{'value':1}")
+	public List<InventoryModel> findTopLimitByPlantCode(String plantCode, PageRequest pageRequest);
+	
+	@Query(value = "{'MaterialNo' : ?0}", sort = "{'value':1}")
+	public List<InventoryModel> findTopLimitByMaterialNo(String materialNo, PageRequest pageRequest);
 
 	@Query(value = "{ 'Region' : ?0 , 'State' : ?1 }", sort = "{ 'value':1 }")
 	public List<InventoryModel> findTopLimitByRegionAndState(String region, String state, PageRequest pageRequest);

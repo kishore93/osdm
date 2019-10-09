@@ -78,8 +78,23 @@ public class ApiController {
 	}
 
 	@GetMapping(value = "/top/{limit}", params = { "region" }, produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<InventoryModel> getRecordsByLimit(@PathVariable int limit, @RequestParam String region) {
+	public List<InventoryModel> getRecordsByLimitForRegion(@PathVariable int limit, @RequestParam String region) {
 		return repository.findTopLimitByRegion(region, PageRequest.of(1, limit, new Sort(Sort.Direction.ASC, "value")));
+	}
+	
+	@GetMapping(value = "/top/{limit}", params = { "state" }, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<InventoryModel> getRecordsByLimitForState(@PathVariable int limit, @RequestParam String state) {
+		return repository.findTopLimitByState(state, PageRequest.of(1, limit, new Sort(Sort.Direction.ASC, "value")));
+	}
+	
+	@GetMapping(value = "/top/{limit}", params = { "plantCode" }, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<InventoryModel> getRecordsByLimitForPlantCode(@PathVariable int limit, @RequestParam String plantCode) {
+		return repository.findTopLimitByPlantCode(plantCode, PageRequest.of(1, limit, new Sort(Sort.Direction.ASC, "value")));
+	}
+	
+	@GetMapping(value = "/top/{limit}", params = { "materialNo" }, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<InventoryModel> getRecordsByLimit(@PathVariable int limit, @RequestParam String materialNo) {
+		return repository.findTopLimitByMaterialNo(materialNo, PageRequest.of(1, limit, new Sort(Sort.Direction.ASC, "value")));
 	}
 
 	@GetMapping(value = "/top/{limit}", params = { "region", "state" }, produces = MediaType.APPLICATION_JSON_VALUE)
