@@ -4,6 +4,7 @@ import { HeatmapDataService } from '../heapmap-data.service';
 
 
 import { HttpErrorResponse } from '@angular/common/http';
+import { map } from '../map';
 
 @Component({
   selector: 'app-heat-map',
@@ -11,7 +12,10 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./heat-map.component.css']
 })
 export class HeatMapComponent implements OnInit {
-  @Input() message?: string;
+  @Input() message?: any;
+  maping:map;
+
+  
   filteron: any;
   filterValue: string;
   dataFrom: any;
@@ -26,14 +30,13 @@ export class HeatMapComponent implements OnInit {
     check: boolean;
     showAlertDialog: boolean = false;
     ngOnInit(){
-      
+     
     }
-  ngOnChanges(changes: SimpleChanges){
-    
-    if(this.message){  
+  ngOnChanges(change: SimpleChanges){
+   
+    if(this.message.length>0){  
       this.myData.getFiltered(this.message).subscribe(
         data => {
-          console.log(data)
           this.main(data);
         },
         (err: HttpErrorResponse) => {
@@ -43,6 +46,7 @@ export class HeatMapComponent implements OnInit {
     }
     else{
       this.myData.getDataForTop().subscribe(
+        
         data => {
           this.main(data);
         },
@@ -54,6 +58,7 @@ export class HeatMapComponent implements OnInit {
 
     }
   constructor(private myData:HeatmapDataService){
+    
     }
     
     //calculation of width
@@ -62,7 +67,7 @@ export class HeatMapComponent implements OnInit {
   // return width
   // }
   main(data) {
-    console.log(data)
+    
     var maxVal=0 
     var minVal=100000000;
   
@@ -222,7 +227,7 @@ export class HeatMapComponent implements OnInit {
   .attr("width", function(d){
     if(loopcount1!=0){
       loopcount1--;
-      console.log(temp)
+      
       return temp;
     }
     else if(count1!=0){

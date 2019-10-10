@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HeatmapDataService } from '../heapmap-data.service';
 import { MatAutocompleteSelectedEvent } from '@angular/material';
+import { map } from '../map';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-nav-menu',
   templateUrl: './nav-menu.component.html',
@@ -11,7 +14,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material';
 export class NavMenuComponent implements OnInit {
   public myForm: FormGroup;
   materialNumbers: string[] = [];
-  constructor(private fb: FormBuilder,public myData: HeatmapDataService) { }
+  constructor(private cd: ChangeDetectorRef,private router:Router, private fb: FormBuilder,public myData: HeatmapDataService) { }
   showAlertDialog:boolean;
   mydata: Array<any>;
   region = new Set();
@@ -19,7 +22,13 @@ export class NavMenuComponent implements OnInit {
   options1: string[] = [];
   states1= new Set();
   plantCode1= new Set();
-  newArray1:string[];
+  newArray=[]
+  newArray1:map={
+    Region:undefined,
+    State: undefined,
+    PlantCode: undefined ,
+    MaterialNo:undefined
+  }
   inventory:boolean;
   excess:boolean;
   obsolete:boolean;
@@ -30,7 +39,7 @@ export class NavMenuComponent implements OnInit {
   isClicked1:boolean = false;
   isClicked2:boolean = false;
   isClicked3:boolean = false;
-  isClicked4:boolean = false;
+  isClicked4:boolean = true;
   isClicked5:boolean = false;
 
   isClicked6:boolean = false;
@@ -46,7 +55,7 @@ export class NavMenuComponent implements OnInit {
   public show:boolean = false;
   public show1:boolean = false;
   public show2:boolean = false;
-  public show3:boolean = false;
+  public show3:boolean = true;
   public show4:boolean = false;
   public show5:boolean = false;
 
@@ -58,7 +67,7 @@ export class NavMenuComponent implements OnInit {
     this.show = !this.show;
     this.isClicked1=false;
     this.isClicked3 = false;
-    this.isClicked4 = false;
+    
     this.isClicked5 = false;
 
     this.isClicked6 = false;
@@ -71,24 +80,16 @@ export class NavMenuComponent implements OnInit {
     
     }
     callfun5() {
-      this.show2=false
-      this.show1=false;
-      this.isClicked2=false;
+      
       this.isClicked=false;
-      this.show5 = !this.show5;
-      this.show =false;
-      this.isClicked3 = true;
-      this.isClicked4 = false;
-      this.isClicked5 = false;
-      this.isClicked6 = false;
-      this.isClicked7 = false;
-      this.isClicked8 = true;
-      this.isClicked9 = false;
-      this.isClicked17=false;
-      this.isClicked18=false;
-  
+      this.isClicked2=false;
+      this.show=false;
+      this.show1=false;
       }
    callfun1() {
+    this.isClicked4=true;
+    this.isClicked5=false
+    this.isClicked14=false;
     this.show1 = !this.show1;
     this.isClicked3=!this.isClicked3;
     this.isClicked6=false;
@@ -100,7 +101,9 @@ export class NavMenuComponent implements OnInit {
     this.show2 = !this.show2;
     this.show1=false;
     this.isClicked3=false;
+    this.isClicked5=false;
     this.isClicked6=false;
+    this.isClicked14=false;
     this.isClicked17=false;
     this.isClicked8=true
    }
@@ -123,7 +126,7 @@ export class NavMenuComponent implements OnInit {
       
       },
       (err: HttpErrorResponse) => {
-        console.log("am error")
+       
         console.log (err.message);
       }
     )
@@ -167,14 +170,25 @@ export class NavMenuComponent implements OnInit {
   methodForStates(event: MatAutocompleteSelectedEvent){
     var states = new Set();
     states.add("ALL")
+  
     for (let entry of this.mydata) {
       if(entry.region==event.option.value || event.option.value=="ALL"){
         states.add(entry.state);
       }  
     }
     this.states1=states
+    this.myData.filterMaterialDropDown(event.option.value).subscribe(
+      data => {
+        this.materialNumbers=data as string [];
+      
+      },
+      (err: HttpErrorResponse) => {
+        console.log (err.message);
+      }
+    )
   }
   plantcodeselected(state){
+   
     var plantCode = new Set();
     for (let entry of this.mydata) {
       if(entry.state==state.value || state.value=="ALL"){
@@ -182,37 +196,106 @@ export class NavMenuComponent implements OnInit {
       }
     }
     this.plantCode1=plantCode;
+   
+    this.myData.filterMaterialDropDownState(this.myForm.controls.region.value,state).subscribe(
+      data => {
+       
+        this.materialNumbers=data as string [];
+        
+      },
+      (err: HttpErrorResponse) => {
+        console.log (err.message);
+      }
+    )
   
+  }
+  Lastplantcodeselected(plantCode){
+    this.myData.filterMaterialDropDownPlantCode(this.myForm.controls.region.value,this.myForm.controls.state.value,
+      plantCode).subscribe(
+      data => {
+        this.materialNumbers=data as string [];
+      },
+      (err: HttpErrorResponse) => {
+        console.log (err.message);
+      }
+    )
   }
   //onclick of generate heatmap
   servicehit(){
-    this.divshow = false;
-    this.newArray1=null
-    if(this.myForm.controls.materialNo.value){
-      console.log(this.myForm.controls.materialNo.value)
-      this.newArray1=["materialNo",this.myForm.controls.materialNo.value]
+    this.newArray1.Region=this.myForm.controls.region.value
+    this.newArray1.State=this.myForm.controls.state.value
+    this.newArray1.PlantCode=this.myForm.controls.plantCode.value
+    this.newArray1.MaterialNo=this.myForm.controls.materialNo.value
+    this.newArray=[]
+    if(this.myForm.controls.region.value){
+      this.newArray.push("region")
+      this.newArray.push(this.myForm.controls.region.value)
     }
+    if(this.myForm.controls.state.value){
+      this.newArray.push("state")
+      this.newArray.push(this.myForm.controls.state.value)
+      //this.newArray=["state",this.myForm.controls.state.value]
+    } 
     if(this.myForm.controls.plantCode.value){
-      this.newArray1=["plantCode",this.myForm.controls.plantCode.value]
-    }  
-    this.divshow = true;
-  }
-  generateHeatmapFunction(){
-    this.newArray1=null
-    if(this.isClicked17 && this.isClicked18){
-      this.newArray1=["excess","obsolete"]
+      this.newArray.push("plantCode")
+      this.newArray.push(this.myForm.controls.plantCode.value)
+      //this.newArray=["plantCode",this.myForm.controls.plantCode.value]
     }
-    else if(this.isClicked17){
-      this.newArray1=["excess"]
-      console.log("clicked 17--excess")
+    if(this.myForm.controls.materialNo.value){
+      this.newArray.push("materialNo")
+      this.newArray.push(this.myForm.controls.materialNo.value)
+      //this.newArray=["materialNo",this.myForm.controls.materialNo.value]
     }
-    else if(this.isClicked18){
-      this.newArray1=["obsolete"]
-      console.log("clicked 18")
+    // if(this.isClicked18){
+    //   this.newArray.push("obsolete")
+    //   this.newArray.push("true")
+    // }
+    // if(this.isClicked3 && this.isClicked17){
+    //   this.newArray.push("excessQty")
+    //   this.newArray.push("true")
+    // }
+    // if(this.isClicked6 && this.isClicked17){
+    //   this.newArray.push("excess value")
+    //   this.newArray.push("true")
+    // }
+    if(this.isClicked4 && this.isClicked17 && this.isClicked3){
+      this.newArray.push("excessQty30Days")
+      this.newArray.push("true")
     }
-    console.log(this.newArray1)
+    if(this.isClicked5 && this.isClicked17  && this.isClicked3){
+      this.newArray.push("excessQty60Days")
+      this.newArray.push("true")
+    }
+    if(this.isClicked14 && this.isClicked17  && this.isClicked3){
+      this.newArray.push("excessQty90Days")
+      this.newArray.push("true")
+    }
+    if(this.isClicked4 && this.isClicked17 && this.isClicked6){
+      this.newArray.push("excessValue30Days")
+      this.newArray.push("true")
+    }
+    if(this.isClicked5 && this.isClicked17 && this.isClicked6){
+      this.newArray.push("excessValue60Days")
+      this.newArray.push("true")
+    }
+    if(this.isClicked14 && this.isClicked17 && this.isClicked6){
+      this.newArray.push("excessValue90Days")
+      this.newArray.push("true")
+    }
+    if(this.isClicked8 && this.isClicked18){
+      this.newArray.push("obsoluteQty")
+      this.newArray.push("true")
+    }
+    if(this.isClicked9 && this.isClicked18){
+      this.newArray.push("obsoluteValue")
+      this.newArray.push("true")
+    }
 
+    console.log(this.newArray)
+
+   
   }
+ 
   excessServiceCall(){
 
   }
@@ -257,14 +340,16 @@ export class NavMenuComponent implements OnInit {
     } 
   }
   excessUnitMethod(){
+    this.show3=true
     this.isClicked6=false;
-    this.isClicked4=false;
+  
     this.isClicked5=false;
     this.isClicked14=false;
   }
   excessValueMethod(){
+    this.show3=true;
     this.isClicked3=false;
-    this.isClicked4=false;
+    
     this.isClicked5=false;
     this.isClicked14=false;
   }

@@ -8,21 +8,8 @@
             <form [formGroup]="myForm">
             <div class="row">
                 <div class="col-6 form-attr">
-                    <mat-form-field class="example-full-width">
-                        <mat-placeholder class="myclass">materialNo</mat-placeholder>
-                        <input (keyup)="onKey($event.target.value)" type="text" class="form-control" matInput formControlName="materialNo" [matAutocomplete]="auto">
-                        <mat-autocomplete #auto="matAutocomplete">
-                            <mat-option *ngFor="let option1 of materialNumbers" [value]="option1">
-                            {{option1}}
-                            </mat-option>
-                        </mat-autocomplete>
-                    </mat-form-field>  
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6 form-attr">
                 <mat-form-field *ngIf="true" class="example-full-width">
-                    <mat-placeholder class="myclass">region</mat-placeholder>
+                    <mat-placeholder class="myclass">Region</mat-placeholder>
                     <input  type="text" class="form-control" matInput formControlName="region" [matAutocomplete]="auto">
                     <mat-autocomplete style="color: red" (optionSelected)="methodForStates($event)" #auto="matAutocomplete" >
                         <mat-option *ngFor="let option2 of region" [value]="option2">
@@ -35,7 +22,7 @@
             <div class="row">
                 <div class="col-6 form-attr">
                 <mat-form-field *ngIf="f.region.value">
-                    <mat-label class="myclass">state</mat-label>
+                    <mat-label class="myclass">State</mat-label>
                     <mat-select style="color: red" (selectionChange)="plantcodeselected($event)" formControlName="state">
                         <mat-option *ngFor="let state of states1" [value]="state">
                         {{state}}
@@ -47,13 +34,27 @@
             <div class="row">
                 <div class="col-6 form-attr">
                     <mat-form-field *ngIf="f.state.value">
-                        <mat-label class="myclass">plantCode</mat-label>
-                        <mat-select style="color: red" formControlName="plantCode">
+                        <mat-label class="myclass">Plant Code</mat-label>
+                        <mat-select (selectionChange)="Lastplantcodeselected($event)" style="color: red" formControlName="plantCode">
                             <mat-option *ngFor="let state of plantCode1" [value]="state">
                             {{state}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 form-attr">
+                    <mat-form-field class="example-full-width">
+                        <mat-placeholder class="myclass">Material No</mat-placeholder>
+                        <!-- (keyup)="onKey($event.target.value)" -->
+                        <input  type="text" class="form-control" matInput formControlName="materialNo" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let option1 of materialNumbers" [value]="option1">
+                            {{option1}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>  
                 </div>
             </div>
             <br>
@@ -79,7 +80,7 @@
                             <button class="excessValue" (click)="isClicked6 = !isClicked6" [class.myClass]="isClicked6" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect (click)="excessValueMethod()">Excess (value)</button>
                         </div>
                         <div style="width:50%;display: inline-block;" class="day-div">
-                            <div class="groupbuttons" *ngIf="isClicked3 || isClicked6">
+                            <div class="groupbuttons" *ngIf="show3 && (isClicked3 || isClicked6)">
                                 <div>
                                     <button class="days" (click)="isClicked4 = !isClicked4" [class.myClass]="isClicked4" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>30 days</button>
                                 </div>
@@ -178,11 +179,11 @@
                 </div>
                 </div>
             </div> -->
-            <div class="heatmapcls" *ngIf="newArray1; else loggedOut">
-                <app-heat-map [message]="newArray1">loading please wait</app-heat-map>
+            <div class="heatmapcls" *ngIf="newArray; else loggedOut">
+                <app-heat-map [message]="newArray">loading please wait</app-heat-map>
             </div>
             <ng-template #loggedOut>
-                <app-heat-map  [message]="top50">loading please wait</app-heat-map>
+                <app-heat-map  [message]="">loading please wait</app-heat-map>
             </ng-template>
         </div>
                 <!-- <table>

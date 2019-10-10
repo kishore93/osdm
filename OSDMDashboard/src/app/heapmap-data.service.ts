@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { objectClass } from './objectClass';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { variable } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ data:objectClass;
   }
   //unique material numbers
   uniqueRecords(){
-    return this.http.get('http://localhost:9100/api/v1/material-numbers');
+    return this.http.get('http://localhost:9100/api/v1/material-numbers?region=&state=&plantCode=');
   }
   //top records based on inventory value
   getDataForTop(){
@@ -25,14 +26,37 @@ data:objectClass;
   }
   getFiltered(message){
     let params = new HttpParams();
-    if(message[0]=="plantCode"){
-      params = params.set("plantCode", message[1]);
-      return this.http.get('http://localhost:9100/api/v1/top/50?',{params: params});
+    console.log(message.length)
+    for (let i:number=0;i<message.length;i=i+2) {
+      params = params.set(message[i], message[i+1]);
     }
-    else if(message[0]=="materialNo"){
-      params = params.set("materialNo", message[1]);
-      
-      return this.http.get('http://localhost:9100/api/v1/top/50?',{params: params});
-    }
+    console.log(params)
+    return this.http.get('http://localhost:9100/api/v1/top/50?',{params: params});
+   
+  }
+  filterMaterialDropDown(region){
+    console.log(region)
+    let params = new HttpParams();
+    params = params.set("region", region);
+    params=params.set("state","");
+    params=params.set("plantCode","")
+    return this.http.get('http://localhost:9100/api/v1/material-numbers?',{params: params});
+  }
+  onClickHeatMap(){
+
+  }
+  filterMaterialDropDownState(region,state){
+    let params = new HttpParams();
+    params = params.set("region", region);
+    params=params.set("state",state.value);
+    params=params.set("plantCode","")
+    return this.http.get('http://localhost:9100/api/v1/material-numbers?',{params: params});
+  }
+  filterMaterialDropDownPlantCode(region,state,Plantcode){
+    let params = new HttpParams();
+    params = params.set("region", region);
+    params=params.set("state",state);
+    params=params.set("plantCode",Plantcode.value)
+    return this.http.get('http://localhost:9100/api/v1/material-numbers?',{params: params});
   }
 }
