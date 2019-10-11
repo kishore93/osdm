@@ -2,11 +2,27 @@ import { Injectable } from '@angular/core';
 import { objectClass } from './objectClass';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { variable } from '@angular/compiler/src/output/output_ast';
+import { map } from './map';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HeatmapDataService {
+  
+  mapping: map={
+    region:undefined,
+    state: undefined,
+    plantCode: undefined,
+    materialNo:undefined,
+    excessQty30Days:undefined,
+    excessQty60Days:undefined,
+    excessQty90Days:undefined,
+    excessValue30Days:undefined,
+    excessValue60Days:undefined,
+    excessValue90Days:undefined,
+    obsoleteQty:undefined,
+    obsoleteValue:undefined
+}
 data:objectClass;
   constructor(private http: HttpClient) { }
   setData(mydata) {
@@ -14,28 +30,81 @@ data:objectClass;
    }
   //for all material numbers
   getData(){
-    return this.http.get('http://localhost:9100/api/v1/all');
+    return this.http.get('http://localhost:9100/api/v1/all?excessQty30Days=&excessQty60Days=&excessQty90Days=&excessValue30Days=&excessValue60Days=&excessValue90Days=&materialNo=&obsoleteQty=&obsoleteValue=&plantCode=&region=&state=&');
   }
   //unique material numbers
-  uniqueRecords(){
+   uniqueRecords(){
     return this.http.get('http://localhost:9100/api/v1/material-numbers?region=&state=&plantCode=');
   }
   //top records based on inventory value
   getDataForTop(){
-    return this.http.get('http://localhost:9100/api/v1/top/50');
+    return this.http.get('http://localhost:9100/api/v1/top/50?excessQty30Days=&excessQty60Days=&excessQty90Days=&excessValue30Days=&excessValue60Days=&excessValue90Days=&materialNo=&obsoleteQty=&obsoleteValue=&plantCode=&region=&state=&');
   }
   getFiltered(message){
     let params = new HttpParams();
-    console.log(message.length)
     for (let i:number=0;i<message.length;i=i+2) {
-      params = params.set(message[i], message[i+1]);
+      if(message[i]=="region"){
+        this.mapping.region=message[i+1]
+        continue
+      }
+      if(message[i]=="state"){
+        this.mapping.state=message[i+1]
+        continue
+      }
+      if(message[i]=="plantCode"){
+        this.mapping.plantCode=message[i+1]
+        continue
+      }
+      if(message[i]=="materialNo"){
+        this.mapping.materialNo=message[i+1]
+        continue
+      }
+      if(message[i]=="excessQty30Days" && message[i+1]!=""){
+        this.mapping.excessQty30Days=true
+        continue
+      }
+      if(message[i]=="excessQty60Days" && message[i+1]!=""){
+        this.mapping.excessQty60Days=true
+        continue
+      }
+      if(message[i]=="excessQty90Days" && message[i+1]!=""){
+        this.mapping.excessQty90Days=true
+        continue
+      }
+      if(message[i]=="excessValue30Days" && message[i+1]!=""){
+        this.mapping.excessValue30Days=true
+        continue
+      }
+      if(message[i]=="excessValue60Days" && message[i+1]!=""){
+        this.mapping.excessValue60Days=true
+        continue
+      }
+      if(message[i]=="excessValue90Days" && message[i+1]!=""){
+        this.mapping.excessValue90Days=true
+        continue
+      }
+      if(message[i]=="obsoleteQty" && message[i+1]!=""){
+        this.mapping.obsoleteQty=true
+        continue
+      }
+      if(message[i]=="obsoleteValue" && message[i+1]!=""){
+        this.mapping.obsoleteValue=true
+        continue
+      }
+      // params = params.set(message[i], message[i+1]);
     }
-    console.log(params)
-    return this.http.get('http://localhost:9100/api/v1/top/50?',{params: params});
    
+    for (let i in this.mapping){
+    
+      if(this.mapping[i]==undefined){
+        this.mapping[i]=""
+      }
+      params = params.set(i, this.mapping[i]);
+    }
+    
+    return this.http.get('http://localhost:9100/api/v1/top/50?',{params: params});
   }
   filterMaterialDropDown(region){
-    console.log(region)
     let params = new HttpParams();
     params = params.set("region", region);
     params=params.set("state","");

@@ -23,12 +23,7 @@ export class NavMenuComponent implements OnInit {
   states1= new Set();
   plantCode1= new Set();
   newArray=[]
-  newArray1:map={
-    Region:undefined,
-    State: undefined,
-    PlantCode: undefined ,
-    MaterialNo:undefined
-  }
+  
   inventory:boolean;
   excess:boolean;
   obsolete:boolean;
@@ -80,7 +75,7 @@ export class NavMenuComponent implements OnInit {
     
     }
     callfun5() {
-      
+      this.show2=false;
       this.isClicked=false;
       this.isClicked2=false;
       this.show=false;
@@ -90,6 +85,7 @@ export class NavMenuComponent implements OnInit {
     this.isClicked4=true;
     this.isClicked5=false
     this.isClicked14=false;
+
     this.show1 = !this.show1;
     this.isClicked3=!this.isClicked3;
     this.isClicked6=false;
@@ -108,6 +104,8 @@ export class NavMenuComponent implements OnInit {
     this.isClicked8=true
    }
    productionOrder(){
+    this.show2=false;
+    this.show1=false;
     this.show5 = false;
     this.show =false;
      this.isClicked=false;
@@ -120,7 +118,9 @@ export class NavMenuComponent implements OnInit {
     //here use uniqueRecords methods for displaying the data 
     this.myData.uniqueRecords().subscribe(
       data => {
+        console.log(data)
         this.materialNumbers=data as string [];
+        
         // this.mydata = data as string [];	 // FILL THE ARRAY WITH DATA.
         //   this.dataLoad(this.mydata)
       
@@ -132,6 +132,7 @@ export class NavMenuComponent implements OnInit {
     )
     this.myData.getData().subscribe(
     data => {
+      console.log(data)
       this.mydata = data as string [];	 // FILL THE ARRAY WITH DATA.
         this.dataLoad(this.mydata)
     
@@ -222,10 +223,6 @@ export class NavMenuComponent implements OnInit {
   }
   //onclick of generate heatmap
   servicehit(){
-    this.newArray1.Region=this.myForm.controls.region.value
-    this.newArray1.State=this.myForm.controls.state.value
-    this.newArray1.PlantCode=this.myForm.controls.plantCode.value
-    this.newArray1.MaterialNo=this.myForm.controls.materialNo.value
     this.newArray=[]
     if(this.myForm.controls.region.value){
       this.newArray.push("region")
@@ -283,15 +280,13 @@ export class NavMenuComponent implements OnInit {
       this.newArray.push("true")
     }
     if(this.isClicked8 && this.isClicked18){
-      this.newArray.push("obsoluteQty")
+      this.newArray.push("obsoleteQty")
       this.newArray.push("true")
     }
     if(this.isClicked9 && this.isClicked18){
-      this.newArray.push("obsoluteValue")
+      this.newArray.push("obsoleteValue")
       this.newArray.push("true")
     }
-
-    console.log(this.newArray)
 
    
   }

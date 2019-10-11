@@ -13,9 +13,9 @@ import { map } from '../map';
 })
 export class HeatMapComponent implements OnInit {
   @Input() message?: any;
-  maping:map;
 
-  
+
+
   filteron: any;
   filterValue: string;
   dataFrom: any;
@@ -33,7 +33,12 @@ export class HeatMapComponent implements OnInit {
      
     }
   ngOnChanges(change: SimpleChanges){
-   
+  //   console.log(this.maping)
+  //  for (let i:number=0;i<this.message.length;i=i+2) {
+  //    if(this.message[i+1]!=""){
+  //     console.log(this.message)
+  //    }
+  //   }
     if(this.message.length>0){  
       this.myData.getFiltered(this.message).subscribe(
         data => {
@@ -67,7 +72,7 @@ export class HeatMapComponent implements OnInit {
   // return width
   // }
   main(data) {
-    
+    console.log(data.length)
     var maxVal=0 
     var minVal=100000000;
   

@@ -80,7 +80,7 @@
                             <button class="excessValue" (click)="isClicked6 = !isClicked6" [class.myClass]="isClicked6" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect (click)="excessValueMethod()">Excess (value)</button>
                         </div>
                         <div style="width:50%;display: inline-block;" class="day-div">
-                            <div class="groupbuttons" *ngIf="show3 && (isClicked3 || isClicked6)">
+                            <div class="groupbuttons" *ngIf="show1 && show3 && (isClicked3 || isClicked6)">
                                 <div>
                                     <button class="days" (click)="isClicked4 = !isClicked4" [class.myClass]="isClicked4" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>30 days</button>
                                 </div>
@@ -96,11 +96,25 @@
                     </div>
                     <div style="width:50%;display: inline-block;">
                         <div class="form-group" *ngIf="show2">
-                            <div>
-                                <button class="obsolClass" (click)="isClicked8 = !isClicked8" [class.myClass]="isClicked8" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>Obsolete Qty</button>
+                            <div style="width: 47%;
+                            float: left;
+                            padding: 0;
+                            margin: 0;
+                            display: inline-block;">
+                                <button style="margin-left: 0;
+                                margin-right:0; 
+                                padding-left: 0;
+                                padding-right: 0;" class="obsolClass" (click)="isClicked8 = !isClicked8" [class.myClass]="isClicked8" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>Obsolete Qty</button>
                             </div>
-                            <div>
-                                <button class="obsolClass" (click)="isClicked9 = !isClicked9" [class.myClass]="isClicked9" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>Obsolete value</button>
+                            <div style="width: 47%;
+                            float: right;
+                            padding: 0;
+                            margin: 0;
+                            display: inline-block;">
+                                <button style="margin-left: 0;
+                                margin-right:0; 
+                                padding-left: 0;
+                                padding-right: 0;" class="obsolClass" (click)="isClicked9 = !isClicked9" [class.myClass]="isClicked9" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>Obsolete value</button>
                             </div>
                         </div>
                     </div>
