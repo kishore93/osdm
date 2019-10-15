@@ -52,7 +52,7 @@ Now the Spring Boot application is up and running.
 5. Go to. /osdm/OSDMDashboard/src/app/heat-map/heat-map.component.ts and comment the line **160 if the given suggestion is at the line 160 .range([&#39;#fff&#39;,&#39;red&#39;]);**.
 6. The application automatically runs.
 7. Once the application is up and running again un-comment the line **160 if the given suggestion is at the line 160** in the same file.
-8. Open chrome browser and type **localhost:4200** and enter.
+8. Open chrome browser and type **`localhost:4200`** and hit **`⏎`**.
 
 **Start MongoDB server in local:**
 
@@ -60,4 +60,4 @@ Now the Spring Boot application is up and running.
 
 **Import data to MongoDB:**
 
-:arrow_forward: **mongoimport --host localhost --db OSDM --collection Inventory --file `<Path to Invetory Sample Data json>`**
+:arrow_forward: **mongoimport --host `localhost` --db `OSDM` --collection `Inventory` --file `<Path to Invetory Sample Data json>`**
