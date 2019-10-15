@@ -1,6 +1,7 @@
 package com.zoomable.map.api.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -117,5 +118,62 @@ public class ApiService {
 		});
 		
 		return output;
+	}
+
+	public List<InventoryModel> find(String region, String state, String plantCode, String materialNo,
+			boolean excessQty30Days, boolean excessQty60Days, boolean excessQty90Days, boolean excessValue30Days,
+			boolean excessValue60Days, boolean excessValue90Days, boolean obsoleteQty, boolean obsoleteValue) {
+		
+		Query query = Util.addBooleanCriteria(excessQty30Days, excessQty60Days, excessQty90Days, excessValue30Days, excessValue60Days, excessValue90Days, obsoleteQty, obsoleteValue);
+		
+		if(Util.isNullOrEmptyorAll(region)) {
+			query.addCriteria(Criteria.where("Region").is(region));
+		}
+		
+		if(Util.isNullOrEmptyorAll(state)) {
+			query.addCriteria(Criteria.where("State").is(state));
+		}
+		
+		if(Util.isNullOrEmptyorAll(plantCode)) {
+			query.addCriteria(Criteria.where("PlantCode").is(plantCode));
+		}
+		
+		if(Util.isNullOrEmptyorAll(materialNo)) {
+			query.addCriteria(Criteria.where("MaterialNo").is(materialNo));
+		}
+		System.out.println(Calendar.getInstance().getTimeInMillis());
+		List<InventoryModel> list = template.find(query, InventoryModel.class);
+		System.out.println(Calendar.getInstance().getTimeInMillis());
+		return list;
+	}
+
+	public List<InventoryModel> findLimit(String region, String state, String plantCode, String materialNo, boolean excessQty30Days,
+			boolean excessQty60Days, boolean excessQty90Days, boolean excessValue30Days, boolean excessValue60Days,
+			boolean excessValue90Days, boolean obsoleteQty, boolean obsoleteValue, int limit) {
+		
+		Query query = Util.addBooleanCriteria(excessQty30Days, excessQty60Days, excessQty90Days, excessValue30Days, excessValue60Days, excessValue90Days, obsoleteQty, obsoleteValue);
+		
+		if(Util.isNullOrEmptyorAll(region)) {
+			query.addCriteria(Criteria.where("Region").is(region));
+		}
+		
+		if(Util.isNullOrEmptyorAll(state)) {
+			query.addCriteria(Criteria.where("State").is(state));
+		}
+		
+		if(Util.isNullOrEmptyorAll(plantCode)) {
+			query.addCriteria(Criteria.where("PlantCode").is(plantCode));
+		}
+		
+		if(Util.isNullOrEmptyorAll(materialNo)) {
+			query.addCriteria(Criteria.where("MaterialNo").is(materialNo));
+		}
+		
+		query.with(Sort.by(Sort.Direction.DESC, "value"));
+		
+		query.limit(limit);
+		
+		return template.find(query, InventoryModel.class);
+		
 	}
 }

@@ -12,14 +12,23 @@ management:
 spring:
   profile: local  data:    mongodb:
       database: OSDM
-      uri: mongodb+srv://osdmrwuser:FsVfSuiP6RYccKoN@odsm-2qvoc.mongodb.net/OSDM?retryWrites=true&w=majority
+      uri: mongodb://localhost:27017/admin
 server:  port: 9100
----
-spring:
-  profile: dev
-  data:
-    mongodb:
-      database: OSDM
-      uri: mongodb+srv://osdmrwuser:FsVfSuiP6RYccKoN@odsm-2qvoc.mongodb.net/OSDM?retryWrites=true&w=majority
-server:
-  port: 9100
+#---
+#spring:
+#  profile: atlas
+#  data:
+#    mongodb:
+#      database: OSDM
+#      uri: mongodb+srv://osdmrwuser:FsVfSuiP6RYccKoN@odsm-2qvoc.mongodb.net/OSDM?retryWrites=true&w=majority
+#server:
+#  port: 9100
+#---
+#spring:
+#  profile: gcp
+#  data:
+#    mongodb:
+#      database: OSDM
+#      uri: mongodb+srv://osdmrwuser:FsVfSuiP6RYccKoN@odsm-2qvoc.mongodb.net/OSDM?retryWrites=true&w=majority
+#server:
+#  port: 8080
