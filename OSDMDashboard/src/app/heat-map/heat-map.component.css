@@ -3,3 +3,7 @@
     margin-bottom: 5%;
     
 }
+svgclass{
+    width: 100% !important;
+    height: 100vh;
+}

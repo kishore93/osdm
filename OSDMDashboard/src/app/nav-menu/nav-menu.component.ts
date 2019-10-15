@@ -118,7 +118,7 @@ export class NavMenuComponent implements OnInit {
     //here use uniqueRecords methods for displaying the data 
     this.myData.uniqueRecords().subscribe(
       data => {
-        console.log(data)
+     
         this.materialNumbers=data as string [];
         
         // this.mydata = data as string [];	 // FILL THE ARRAY WITH DATA.
@@ -132,7 +132,6 @@ export class NavMenuComponent implements OnInit {
     )
     this.myData.getData().subscribe(
     data => {
-      console.log(data)
       this.mydata = data as string [];	 // FILL THE ARRAY WITH DATA.
         this.dataLoad(this.mydata)
     
@@ -171,7 +170,6 @@ export class NavMenuComponent implements OnInit {
   methodForStates(event: MatAutocompleteSelectedEvent){
     var states = new Set();
     states.add("ALL")
-  
     for (let entry of this.mydata) {
       if(entry.region==event.option.value || event.option.value=="ALL"){
         states.add(entry.state);
@@ -180,8 +178,11 @@ export class NavMenuComponent implements OnInit {
     this.states1=states
     this.myData.filterMaterialDropDown(event.option.value).subscribe(
       data => {
+        this.materialNumbers=[]
         this.materialNumbers=data as string [];
-      
+        if(this.myForm.controls.region.value=="North"){
+          this.materialNumbers.push("North")
+        }
       },
       (err: HttpErrorResponse) => {
         console.log (err.message);
@@ -189,7 +190,6 @@ export class NavMenuComponent implements OnInit {
     )
   }
   plantcodeselected(state){
-   
     var plantCode = new Set();
     for (let entry of this.mydata) {
       if(entry.state==state.value || state.value=="ALL"){
@@ -197,11 +197,12 @@ export class NavMenuComponent implements OnInit {
       }
     }
     this.plantCode1=plantCode;
-   
     this.myData.filterMaterialDropDownState(this.myForm.controls.region.value,state).subscribe(
       data => {
-       
         this.materialNumbers=data as string [];
+        if(state.value=="Haryana"){  
+          this.materialNumbers.push("Haryana")
+        }
         
       },
       (err: HttpErrorResponse) => {

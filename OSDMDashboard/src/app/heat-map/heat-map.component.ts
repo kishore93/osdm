@@ -13,9 +13,6 @@ import { map } from '../map';
 })
 export class HeatMapComponent implements OnInit {
   @Input() message?: any;
-
-
-
   filteron: any;
   filterValue: string;
   dataFrom: any;
@@ -72,7 +69,6 @@ export class HeatMapComponent implements OnInit {
   // return width
   // }
   main(data) {
-    console.log(data.length)
     var maxVal=0 
     var minVal=100000000;
   
@@ -96,14 +92,7 @@ export class HeatMapComponent implements OnInit {
     
     
   
-    var defaults = {
-      margin: {top: 24, right: 0, bottom: 0, left: 0},
-      rootname: "TOP",
-      format: ".0f",
-      title: "",
-      width: 800,
-      height: 600
-    };
+ 
     var width = 700;
     var height = 550;
     //var y=this.calculateValues(area,data.length)
@@ -154,12 +143,17 @@ export class HeatMapComponent implements OnInit {
       count=1;
       count1=1;
     }
-      
+    var svgClass=d3.select("body")
+    .append("div")
+    .attr("class","tooltip")
+    .style("width", 100+"%")
+  
     var constx=x;
     //Create SVG element
     d3.select("svg").remove();
     var svg = d3.select(".d3class")
     .append("svg")
+    .attr("class","svgClass")
     .attr("width", width)
     .attr("height", height)
     .attr("stroke", "black")
@@ -167,7 +161,7 @@ export class HeatMapComponent implements OnInit {
 
     var myColor = d3.scaleLinear().domain([minVal,maxVal])
     //remove this line and add after compiling
-    .range(['#fff','red']);
+    .range(["#fff","red"])
                   
   
     var expensesAvgAmount = d3.nest()

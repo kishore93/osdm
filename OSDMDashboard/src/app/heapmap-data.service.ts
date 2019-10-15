@@ -105,23 +105,45 @@ data:objectClass;
     return this.http.get('http://localhost:9100/api/v1/top/50?',{params: params});
   }
   filterMaterialDropDown(region){
-    let params = new HttpParams();
-    params = params.set("region", region);
-    params=params.set("state","");
-    params=params.set("plantCode","")
-    return this.http.get('http://localhost:9100/api/v1/material-numbers?',{params: params});
+    if(region=="North" || region=="South" || region=="India"){
+      let params = new HttpParams();
+      params = params.set("region", region);
+      params=params.set("state","");
+      params=params.set("plantCode","")
+      return this.http.get('http://localhost:9100/api/v1/material-numbers?',{params: params});
+    }
+    else{
+      return this.http.get('http://localhost:9100/api/v1/material-numbers?region=&state=&plantCode=');
+    }
   }
   onClickHeatMap(){
 
   }
   filterMaterialDropDownState(region,state){
-    let params = new HttpParams();
-    params = params.set("region", region);
-    params=params.set("state",state.value);
-    params=params.set("plantCode","")
-    return this.http.get('http://localhost:9100/api/v1/material-numbers?',{params: params});
+    
+    console.log(region)
+    if(region=="ALL" && state.value=="ALL"){
+      return this.http.get('http://localhost:9100/api/v1/material-numbers?region=&state=&plantCode=');
+    }
+    else if(region!="ALL" && state.value=="ALL"){
+      let params = new HttpParams();
+      params = params.set("region", region);
+      params=params.set("state","");
+      params=params.set("plantCode","");
+      return this.http.get('http://localhost:9100/api/v1/material-numbers?',{params: params});
+    }
+
+    else{
+      let params = new HttpParams();
+      params = params.set("region", region);
+      params=params.set("state",state.value);
+      params=params.set("plantCode","")
+      return this.http.get('http://localhost:9100/api/v1/material-numbers?',{params: params});
+    }
+    
   }
   filterMaterialDropDownPlantCode(region,state,Plantcode){
+    console.log("plantCode")
     let params = new HttpParams();
     params = params.set("region", region);
     params=params.set("state",state);
