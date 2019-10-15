@@ -56,8 +56,8 @@ Now the Spring Boot application is up and running.
 
 **Start MongoDB server in local:**
 
-:arrow_forward: mongo --dbpath `<Path for storing MongoDB Data>`
+:arrow_forward: **mongo --dbpath `<Path for storing MongoDB Data>`**
 
 **Import data to MongoDB:**
 
-:arrow_forward: mongoimport --host localhost --db OSDM --collection Inventory --file `<Path to Invetory Sample Data json>`
+:arrow_forward: **mongoimport --host localhost --db OSDM --collection Inventory --file `<Path to Invetory Sample Data json>`**
