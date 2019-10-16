@@ -91,7 +91,7 @@ export class HeatMapComponent implements OnInit {
     .style("width", "26%")					
     .style("height","auto")
     .style("background-color","lightgrey");
-    var width = this.screenWidth*76/100;
+    var width = this.screenWidth*77/100;
     console.log(width)
     var height = 550;
     //var y=this.calculateValues(area,data.length)
