@@ -88,9 +88,9 @@ export class HeatMapComponent implements OnInit {
     .style("position", "absolute")
     .style("z-index", "40")
     .style("visibility", "hidden")
-    .style("width", "26%")					
+    .style("width", "auto")					
     .style("height","auto")
-    .style("background-color","lightgrey");
+    .style("background-color","#D3D3D3");
     var width = this.screenWidth*77/100;
     console.log(width)
     var height = 550;
@@ -260,11 +260,12 @@ export class HeatMapComponent implements OnInit {
     // PlantCode: "+d["plantCode"]+"<br> Material Desc: "+d["materialDescription"]+"<br>"
     // +"Demand 30 Days :"+d["demandFor30Days"]+"<br> Demand 60 Days : "+d["demandFor60Days"]+"<br>"
     // +" Demand 90 Days:"+d["demandFor90Days"]+
-    .html("<table><tr><td style='font-weight: bold;'>Plant Code</td><td style='font-weight: bold;'>: </td> <td>"+d["plantCode"]+"</td></tr>"
-    +"<tr><td style='font-weight: bold;'>Material Description</td> <td style='font-weight: bold;'>: </td><td>"+d["materialDescription"]+"</td>"
-    +"<tr><td style='font-weight: bold;'>Demand 30Days</td><td style='font-weight: bold;'>: </td> <td>"+d["demandFor30Days"]+"</td>"
-    +"<tr><td style='font-weight: bold;'>Demand 60Days</td><td style='font-weight: bold;'>: </td> <td>"+d["demandFor60Days"]+"</td>"
-    +"<tr><td style='font-weight: bold;'>Demand 90Days</td> <td style='font-weight: bold;'>: </td><td>"+d["demandFor90Days"]+"</td>"
+    .html("<table border='1'><tr><th colspan='3' style='text-align:center;border-bottom: 1px solid #505050;'>Material No# " +d["materialNo"]+"</th></tr>"
+     +"<tr><td style='font-weight: bold;'>Plant Code</td> <td>"+d["plantCode"]+"</td></tr>"
+    +"<tr><td style='font-weight: bold;'>Material Description</td><td>"+d["materialDescription"]+"</td></tr>"
+    +"<tr><td style='font-weight: bold;'>Demand 30Days</td> <td>"+d["demandFor30Days"]+"</td></tr>"
+    +"<tr><td style='font-weight: bold;'>Demand 60Days</td> <td>"+d["demandFor60Days"]+"</td></tr>"
+    +"<tr><td style='font-weight: bold;'>Demand 90Days</td> <td>"+d["demandFor90Days"]+"</td></tr>"
     +"</table>")
     .style("padding","1%")
     .style("opacity","1");})  
