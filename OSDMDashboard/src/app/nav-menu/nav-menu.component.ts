@@ -168,6 +168,10 @@ export class NavMenuComponent implements OnInit {
     }
   
   methodForStates(event: MatAutocompleteSelectedEvent){
+    // if( this.myForm.controls.materialNo.value){
+    //   this.myForm.controls.materialNo.setValue("");
+    // }
+    
     var states = new Set();
     states.add("ALL")
     for (let entry of this.mydata) {

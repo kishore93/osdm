@@ -91,7 +91,7 @@ export class HeatMapComponent implements OnInit {
     .style("width", "26%")					
     .style("height","auto")
     .style("background-color","lightgrey");
-    var width = this.screenWidth*70/100;
+    var width = this.screenWidth*76/100;
     console.log(width)
     var height = 550;
     //var y=this.calculateValues(area,data.length)
@@ -260,17 +260,14 @@ export class HeatMapComponent implements OnInit {
     // PlantCode: "+d["plantCode"]+"<br> Material Desc: "+d["materialDescription"]+"<br>"
     // +"Demand 30 Days :"+d["demandFor30Days"]+"<br> Demand 60 Days : "+d["demandFor60Days"]+"<br>"
     // +" Demand 90 Days:"+d["demandFor90Days"]+
-    .html("<table><tr><td style='font-weight: bold;'>PlantCode:</td> <td>"+d["plantCode"]+"</td></tr>"
-    +"<tr><td style='font-weight: bold;'>MaterialDesc:</td> <td>"+d["materialDescription"]+"</td>"
-    +"<tr><td style='font-weight: bold;'>Demand30Days:</td> <td>"+d["demandFor30Days"]+"</td>"
-    +"<tr><td style='font-weight: bold;'>Demand60Days:</td> <td>"+d["demandFor60Days"]+"</td>"
-    +"<tr><td style='font-weight: bold;'>Demand90Days:</td> <td>"+d["demandFor90Days"]+"</td>"
+    .html("<table><tr><td style='font-weight: bold;'>Plant Code</td><td style='font-weight: bold;'>: </td> <td>"+d["plantCode"]+"</td></tr>"
+    +"<tr><td style='font-weight: bold;'>Material Description</td> <td style='font-weight: bold;'>: </td><td>"+d["materialDescription"]+"</td>"
+    +"<tr><td style='font-weight: bold;'>Demand 30Days</td><td style='font-weight: bold;'>: </td> <td>"+d["demandFor30Days"]+"</td>"
+    +"<tr><td style='font-weight: bold;'>Demand 60Days</td><td style='font-weight: bold;'>: </td> <td>"+d["demandFor60Days"]+"</td>"
+    +"<tr><td style='font-weight: bold;'>Demand 90Days</td> <td style='font-weight: bold;'>: </td><td>"+d["demandFor90Days"]+"</td>"
     +"</table>")
     .style("padding","1%")
-    .style("opacity","1");})
-  
-  .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
-  
+    .style("opacity","1");})  
   }
   
   mouseclick = function(d) {
