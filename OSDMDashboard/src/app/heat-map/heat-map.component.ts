@@ -1,35 +1,35 @@
-import { Component, OnInit,Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit,Input, SimpleChanges, ElementRef, ViewChild } from '@angular/core';
 import * as d3 from 'd3'; 
 import { HeatmapDataService } from '../heapmap-data.service';
-
-
 import { HttpErrorResponse } from '@angular/common/http';
-import { map } from '../map';
-
+import { HostListener } from "@angular/core";
 @Component({
   selector: 'app-heat-map',
   templateUrl: './heat-map.component.html',
   styleUrls: ['./heat-map.component.css']
 })
 export class HeatMapComponent implements OnInit {
+  screenWidth
+  screenHeight
+  @HostListener('window:resize', ['$event'])
+  onResize(event?) {
+    this.screenHeight = window.innerHeight;
+    this.screenWidth = window.innerWidth;
+  }
   @Input() message?: any;
   filteron: any;
   filterValue: string;
   dataFrom: any;
-  margin: any = {
-      top: 30,
-      right: 30,
-      bottom: 30,
-      left: 30
-      };
-  width: number = 450 - this.margin.left - this.margin.right;
-  height: number = 450 - this.margin.top - this.margin.bottom;
-    check: boolean;
-    showAlertDialog: boolean = false;
-    ngOnInit(){
-     
-    }
-  ngOnChanges(change: SimpleChanges){
+ 
+  check: boolean;
+  showAlertDialog: boolean = false;
+  ngOnInit(){
+    
+  }
+   ngOnChanges(change: SimpleChanges){
+    
+    // console.log(document.getElementById("mydiv").offsetWidth);
+
   //   console.log(this.maping)
   //  for (let i:number=0;i<this.message.length;i=i+2) {
   //    if(this.message[i+1]!=""){
@@ -60,7 +60,7 @@ export class HeatMapComponent implements OnInit {
 
     }
   constructor(private myData:HeatmapDataService){
-    
+    this.onResize();
     }
     
     //calculation of width
@@ -68,7 +68,9 @@ export class HeatMapComponent implements OnInit {
   //   var width=Math.floor(Math.sqrt(area/(no*2)))
   // return width
   // }
+
   main(data) {
+    
     var maxVal=0 
     var minVal=100000000;
   
@@ -89,11 +91,8 @@ export class HeatMapComponent implements OnInit {
     .style("width", "26%")					
     .style("height","auto")
     .style("background-color","lightgrey");
-    
-    
-  
- 
-    var width = 700;
+    var width = this.screenWidth*70/100;
+    console.log(width)
     var height = 550;
     //var y=this.calculateValues(area,data.length)
     
@@ -257,7 +256,16 @@ export class HeatMapComponent implements OnInit {
   .on("mouseover", function(){return tooltip.style("visibility", "visible");})
   .on("click", function(d){return tooltip.style("top", (d3.event.pageY-10)+"px")
     .style("left",(d3.event.pageX+10)+"px")
-    .text("PlantCode: "+d["plantCode"]+"Material Desc: "+d["materialDescription"]+" Demand 30 Days :"+d["demandFor30Days"]+" Demand 60 Days : "+d["demandFor60Days"]+" Demand 90 Days:"+d["demandFor90Days"])
+    // .text("PlantCode: "+d["plantCode"]+"Material Desc: "+d["materialDescription"]+" Demand 30 Days :"+d["demandFor30Days"]+" Demand 60 Days : "+d["demandFor60Days"]+" Demand 90 Days:"+d["demandFor90Days"])
+    // PlantCode: "+d["plantCode"]+"<br> Material Desc: "+d["materialDescription"]+"<br>"
+    // +"Demand 30 Days :"+d["demandFor30Days"]+"<br> Demand 60 Days : "+d["demandFor60Days"]+"<br>"
+    // +" Demand 90 Days:"+d["demandFor90Days"]+
+    .html("<table><tr><td style='font-weight: bold;'>PlantCode:</td> <td>"+d["plantCode"]+"</td></tr>"
+    +"<tr><td style='font-weight: bold;'>MaterialDesc:</td> <td>"+d["materialDescription"]+"</td>"
+    +"<tr><td style='font-weight: bold;'>Demand30Days:</td> <td>"+d["demandFor30Days"]+"</td>"
+    +"<tr><td style='font-weight: bold;'>Demand60Days:</td> <td>"+d["demandFor60Days"]+"</td>"
+    +"<tr><td style='font-weight: bold;'>Demand90Days:</td> <td>"+d["demandFor90Days"]+"</td>"
+    +"</table>")
     .style("padding","1%")
     .style("opacity","1");})
   
