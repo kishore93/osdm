@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <form [formGroup]="myForm">
             <div class="row">
-                <div class="col-6 form-attr">
+                <div class="col-12 form-attr">
                 <mat-form-field *ngIf="true" class="example-full-width">
                     <mat-placeholder class="myclass">Region</mat-placeholder>
                     <input  type="text" class="form-control" matInput formControlName="region" [matAutocomplete]="auto">
@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6 form-attr">
+                <div class="col-12 form-attr">
                 <mat-form-field *ngIf="f.region.value">
                     <mat-label class="myclass">State</mat-label>
                     <mat-select style="color: red" (selectionChange)="plantcodeselected($event)" formControlName="state">
@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6 form-attr">
+                <div class="col-12 form-attr">
                     <mat-form-field *ngIf="f.state.value">
                         <mat-label class="myclass">Plant Code</mat-label>
                         <mat-select (selectionChange)="Lastplantcodeselected($event)" style="color: red" formControlName="plantCode">
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6 form-attr">
+                <div class="col-12 form-attr">
                     <mat-form-field class="example-full-width">
                         <mat-placeholder class="myclass">Material No</mat-placeholder>
                         <!-- (keyup)="onKey($event.target.value)" -->

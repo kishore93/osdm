@@ -175,8 +175,8 @@ button:hover{
 }
 
 .maindiv{
-    width: 700px;
-    margin-left: 0;
+    width: 100%;
+    margin: 0 auto;
 }
 .col-md-4{
     padding-left: 0;
