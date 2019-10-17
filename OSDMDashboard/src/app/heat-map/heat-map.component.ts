@@ -89,6 +89,7 @@ export class HeatMapComponent implements OnInit {
     .append("div")
     .attr("class","tooltip")
     .style("position", "absolute")
+    .style("pointer-events","none")
     .style("z-index", "40")
     .style("visibility", "hidden")
     .style("width", "auto")					
