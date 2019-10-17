@@ -68,15 +68,15 @@ mat-form-field{
     line-height: normal;
 }
 .excessUnit, .excessValue{
-    padding: 2% 0;
+    padding: 10% 10%;
     font-size: 10px;
     font-weight: 700;
 }
 .excessValue{
-    margin-top: 85%;
+    margin-top: 69%;
 }
 .days{
-    padding: 2% 5%;
+    padding: 17% 16%;;
     font-size: 10px;
     font-weight: 700;
 }
