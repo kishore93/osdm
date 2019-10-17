@@ -168,9 +168,9 @@ export class NavMenuComponent implements OnInit {
     }
   
   methodForStates(event: MatAutocompleteSelectedEvent){
-    // if( this.myForm.controls.materialNo.value){
-    //   this.myForm.controls.materialNo.setValue("");
-    // }
+    if( this.myForm.controls.materialNo.value){
+      this.myForm.controls.materialNo.setValue("");
+    }
     
     var states = new Set();
     states.add("ALL")
@@ -194,6 +194,10 @@ export class NavMenuComponent implements OnInit {
     )
   }
   plantcodeselected(state){
+    if( this.myForm.controls.materialNo.value || this.myForm.controls.plantCode.value){
+      this.myForm.controls.materialNo.setValue("");
+      this.myForm.controls.plantCode.setValue("");
+    }
     var plantCode = new Set();
     for (let entry of this.mydata) {
       if(entry.state==state.value || state.value=="ALL"){
