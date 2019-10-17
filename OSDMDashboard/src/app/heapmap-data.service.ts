@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { objectClass } from './objectClass';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { variable } from '@angular/compiler/src/output/output_ast';
+
 import { map } from './map';
 
 @Injectable({
@@ -42,6 +42,18 @@ data:objectClass;
   }
   getFiltered(message){
     let params = new HttpParams();
+    this.mapping.region=""
+    this.mapping.state=""
+    this.mapping.plantCode=""
+    this.mapping.materialNo=""
+    this.mapping.excessQty30Days=false
+    this.mapping.excessQty60Days=false
+    this.mapping.excessQty90Days=false
+    this.mapping.excessValue30Days=false;
+    this.mapping.excessValue60Days=false;
+    this.mapping.excessValue90Days=false;
+    this.mapping.obsoleteQty=false;
+    this.mapping.obsoleteValue=false;
     for (let i:number=0;i<message.length;i=i+2) {
       if(message[i]=="region"){
         this.mapping.region=message[i+1]
@@ -56,6 +68,7 @@ data:objectClass;
         continue
       }
       if(message[i]=="materialNo"){
+        console.log(message[i+1])
         this.mapping.materialNo=message[i+1]
         continue
       }
@@ -93,15 +106,13 @@ data:objectClass;
       }
       // params = params.set(message[i], message[i+1]);
     }
-   
     for (let i in this.mapping){
-    
-      if(this.mapping[i]==undefined){
+      if(this.mapping[i]==undefined || this.mapping[i]==""){
         this.mapping[i]=""
       }
       params = params.set(i, this.mapping[i]);
     }
-    
+   
     return this.http.get('http://localhost:9100/api/v1/top/50?',{params: params});
   }
   filterMaterialDropDown(region){

@@ -36,9 +36,11 @@ export class HeatMapComponent implements OnInit {
   //     console.log(this.message)
   //    }
   //   }
+
     if(this.message.length>0){  
       this.myData.getFiltered(this.message).subscribe(
         data => {
+        
           this.main(data);
         },
         (err: HttpErrorResponse) => {
@@ -50,6 +52,7 @@ export class HeatMapComponent implements OnInit {
       this.myData.getDataForTop().subscribe(
         
         data => {
+          
           this.main(data);
         },
         (err: HttpErrorResponse) => {
@@ -268,7 +271,8 @@ export class HeatMapComponent implements OnInit {
     +"<tr><td style='font-weight: bold;'>Demand 90Days</td> <td>"+d["demandFor90Days"]+"</td></tr>"
     +"</table>")
     .style("padding","1%")
-    .style("opacity","1");})  
+    .style("opacity","1");})
+    .on("mouseout", function(){return tooltip.style("visibility", "hidden");});  
   }
   
   mouseclick = function(d) {
