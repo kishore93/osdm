@@ -171,6 +171,8 @@ export class NavMenuComponent implements OnInit {
     if( this.myForm.controls.materialNo.value){
       this.myForm.controls.materialNo.setValue("");
     }
+    this.myForm.controls.state.setValue("");
+    this.myForm.controls.plantCode.setValue("");
     
     var states = new Set();
     states.add("ALL")
