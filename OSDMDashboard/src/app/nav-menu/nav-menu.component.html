@@ -58,7 +58,7 @@
                 </div>
             </div>
             <br>
-                <button class="btn generateHeatmap" (click)="servicehit()">Generate HeatMap</button> 
+                <button class="btn generateHeatmap" *ngIf="isClicked4 || isClicked5 || isClicked14 || isClicked8 || isClicked9" (click)="servicehit()">Generate HeatMap</button> 
             </form>
         </div>
     </div>
@@ -82,13 +82,13 @@
                         <div style="width:50%;display: inline-block;" class="day-div">
                             <div class="groupbuttons" *ngIf="show1 && show3 && (isClicked3 || isClicked6)">
                                 <div>
-                                    <button class="days" (click)="isClicked4 = !isClicked4" [class.myClass]="isClicked4" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>30 days</button>
+                                    <button class="days" (click)="isClicked4 = !isClicked4;excessUnit30Method()" [class.myClass]="isClicked4" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>30 days</button>
                                 </div>
                                 <div>
-                                    <button class="days" (click)="isClicked5 = !isClicked5" [class.myClass]="isClicked5" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>60 days</button>
+                                    <button class="days" (click)="isClicked5 = !isClicked5;excessUnit60Method()" [class.myClass]="isClicked5" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>60 days</button>
                                 </div>
                                 <div>
-                                    <button class="days" (click)="isClicked14 = !isClicked14" [class.myClass]="isClicked14" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>90 days</button>
+                                    <button class="days" (click)="isClicked14 = !isClicked14;excessUnit90Method()" [class.myClass]="isClicked14" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>90 days</button>
                                 </div>
                             </div>
                         </div>

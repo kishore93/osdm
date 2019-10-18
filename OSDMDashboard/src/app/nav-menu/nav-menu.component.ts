@@ -34,7 +34,7 @@ export class NavMenuComponent implements OnInit {
   isClicked1:boolean = false;
   isClicked2:boolean = false;
   isClicked3:boolean = false;
-  isClicked4:boolean = true;
+  isClicked4:boolean = false;
   isClicked5:boolean = false;
 
   isClicked6:boolean = false;
@@ -82,7 +82,7 @@ export class NavMenuComponent implements OnInit {
       this.show1=false;
       }
    callfun1() {
-    this.isClicked4=true;
+    this.isClicked4=!this.isClicked4;
     this.isClicked5=false
     this.isClicked14=false;
 
@@ -94,6 +94,7 @@ export class NavMenuComponent implements OnInit {
    }
    //obsolute button click function
    callfun2() {
+    this.isClicked8=true
     this.show2 = !this.show2;
     this.show1=false;
     this.isClicked3=false;
@@ -101,7 +102,7 @@ export class NavMenuComponent implements OnInit {
     this.isClicked6=false;
     this.isClicked14=false;
     this.isClicked17=false;
-    this.isClicked8=true
+    
    }
    productionOrder(){
     this.show2=false;
@@ -346,6 +347,7 @@ export class NavMenuComponent implements OnInit {
     } 
   }
   excessUnitMethod(){
+    this.isClicked4=true
     this.show3=true
     this.isClicked6=false;
   
@@ -353,11 +355,25 @@ export class NavMenuComponent implements OnInit {
     this.isClicked14=false;
   }
   excessValueMethod(){
+    this.isClicked4=true
     this.show3=true;
     this.isClicked3=false;
     
     this.isClicked5=false;
     this.isClicked14=false;
+  }
+  excessUnit30Method(){
+    console.log("am sumanth")
+    this.isClicked5=false;
+    this.isClicked14=false
+  }
+  excessUnit60Method(){
+    this.isClicked4=false;
+    this.isClicked14=false
+  }
+  excessUnit90Method(){
+    this.isClicked4=false;
+    this.isClicked5=false
   }
  
 
