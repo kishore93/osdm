@@ -41,7 +41,7 @@ export class NavMenuComponent implements OnInit {
   isClicked7:boolean = false;
   isClicked8:boolean = false;
 
-
+  buttonBoolean:boolean=false;
   isClicked9:boolean = false;
   isClicked17:boolean=false;
   isClicked18:boolean=false;
@@ -60,6 +60,9 @@ export class NavMenuComponent implements OnInit {
     this.show5 = false;
     this.isClicked2=false;
     this.show = !this.show;
+    if(!this.show){
+      this.buttonBoolean=false;
+    }
     this.isClicked1=false;
     this.isClicked3 = false;
     
@@ -82,11 +85,18 @@ export class NavMenuComponent implements OnInit {
       this.show1=false;
       }
    callfun1() {
+    this.buttonBoolean=!this.buttonBoolean
     this.isClicked4=!this.isClicked4;
     this.isClicked5=false
     this.isClicked14=false;
 
     this.show1 = !this.show1;
+    if(this.show1){
+      this.buttonBoolean=true;
+    }else{
+      this.buttonBoolean=false;
+    }
+
     this.isClicked3=!this.isClicked3;
     this.isClicked6=false;
     this.show2=false;
@@ -96,6 +106,12 @@ export class NavMenuComponent implements OnInit {
    callfun2() {
     this.isClicked8=true
     this.show2 = !this.show2;
+    if(this.show2){
+      this.buttonBoolean=true;
+    }
+    else{
+      this.buttonBoolean=false;
+    }
     this.show1=false;
     this.isClicked3=false;
     this.isClicked5=false;
@@ -363,17 +379,57 @@ export class NavMenuComponent implements OnInit {
     this.isClicked14=false;
   }
   excessUnit30Method(){
-    console.log("am sumanth")
     this.isClicked5=false;
     this.isClicked14=false
+    this.isClicked4 = !this.isClicked4;
+    if(this.isClicked4){
+      this.buttonBoolean=true;
+    }
+    else{
+      this.buttonBoolean=false
+    }
   }
   excessUnit60Method(){
+    this.isClicked5 = !this.isClicked5;
     this.isClicked4=false;
-    this.isClicked14=false
+    this.isClicked14=false;
+    if(this.isClicked5){
+      this.buttonBoolean=true;
+    }
+    else{
+      this.buttonBoolean=false
+    }
   }
   excessUnit90Method(){
+    this.isClicked14 = !this.isClicked14;
+    if(this.isClicked14){
+      this.buttonBoolean=true;
+    }
+    else{
+      this.buttonBoolean=false
+    }
     this.isClicked4=false;
     this.isClicked5=false
+  }
+  obsoleteQtyMethod(){
+    this.isClicked8 = !this.isClicked8;
+    if(this.isClicked8){
+      this.buttonBoolean=true;
+    }
+    else{
+      this.buttonBoolean=false
+    }
+    this.isClicked9=false;
+  }
+  obsoleteValueMethod(){
+    this.isClicked8=false
+    this.isClicked9 = !this.isClicked9;
+    if(this.isClicked9){
+      this.buttonBoolean=true;
+    }
+    else{
+      this.buttonBoolean=false
+    }
   }
  
 

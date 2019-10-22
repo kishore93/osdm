@@ -58,7 +58,7 @@
                 </div>
             </div>
             <br>
-                <button class="btn generateHeatmap" *ngIf="isClicked4 || isClicked5 || isClicked14 || isClicked8 || isClicked9" (click)="servicehit()">Generate HeatMap</button> 
+                <button class="btn generateHeatmap" *ngIf="buttonBoolean" (click)="servicehit()">Generate HeatMap</button> 
             </form>
         </div>
     </div>
@@ -82,13 +82,13 @@
                         <div style="width:50%;display: inline-block;" class="day-div">
                             <div class="groupbuttons" *ngIf="show1 && show3 && (isClicked3 || isClicked6)">
                                 <div>
-                                    <button class="days" (click)="isClicked4 = !isClicked4;excessUnit30Method()" [class.myClass]="isClicked4" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>30 days</button>
+                                    <button class="days" (click)="excessUnit30Method()" [class.myClass]="isClicked4" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>30 days</button>
                                 </div>
                                 <div>
-                                    <button class="days" (click)="isClicked5 = !isClicked5;excessUnit60Method()" [class.myClass]="isClicked5" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>60 days</button>
+                                    <button class="days" (click)="excessUnit60Method()" [class.myClass]="isClicked5" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>60 days</button>
                                 </div>
                                 <div>
-                                    <button class="days" (click)="isClicked14 = !isClicked14;excessUnit90Method()" [class.myClass]="isClicked14" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>90 days</button>
+                                    <button class="days" (click)="excessUnit90Method()" [class.myClass]="isClicked14" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>90 days</button>
                                 </div>
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                             display: inline-block;">
                                 <button style="margin-left: 0;
                                 margin-right:0; 
-                                padding: 15% 5%;" class="obsolClass" (click)="isClicked8 = !isClicked8;isClicked9 = !isClicked9;" [class.myClass]="isClicked8" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>Obsolete Qty</button>
+                                padding: 15% 5%;" class="obsolClass" (click)=" obsoleteQtyMethod()" [class.myClass]="isClicked8" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>Obsolete Qty</button>
                             </div>
                             <div style="width: 47%;
                             float: right;
@@ -112,7 +112,7 @@
                             display: inline-block;">
                                 <button style="margin-left: 0;
                                 margin-right:0; 
-                                padding: 8% 5%;" class="obsolClass" (click)="isClicked9 = !isClicked9; isClicked8 = !isClicked8" [class.myClass]="isClicked9" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>Obsolete value</button>
+                                padding: 8% 5%;" class="obsolClass" (click)="obsoleteValueMethod()" [class.myClass]="isClicked9" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>Obsolete value</button>
                             </div>
                         </div>
                     </div>
