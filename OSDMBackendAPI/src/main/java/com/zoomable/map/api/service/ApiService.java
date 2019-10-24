@@ -1,7 +1,6 @@
 package com.zoomable.map.api.service;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -141,9 +140,7 @@ public class ApiService {
 		if(Util.isNullOrEmptyorAll(materialNo)) {
 			query.addCriteria(Criteria.where("MaterialNo").is(materialNo));
 		}
-		System.out.println(Calendar.getInstance().getTimeInMillis());
 		List<InventoryModel> list = template.find(query, InventoryModel.class);
-		System.out.println(Calendar.getInstance().getTimeInMillis());
 		return list;
 	}
 
@@ -169,7 +166,25 @@ public class ApiService {
 			query.addCriteria(Criteria.where("MaterialNo").is(materialNo));
 		}
 		
-		query.with(Sort.by(Sort.Direction.DESC, "value"));
+		if(excessQty30Days) {
+			query.with(Sort.by(Sort.Direction.DESC, "ExcessQty30Days"));
+		} else if(excessQty60Days) {
+			query.with(Sort.by(Sort.Direction.DESC, "ExcessQty60Days"));
+		}else if(excessQty90Days) {
+			query.with(Sort.by(Sort.Direction.DESC, "ExcessQty90Days"));
+		}else if(excessValue30Days) {
+			query.with(Sort.by(Sort.Direction.DESC, "ExcessValue30Days"));
+		}else if(excessValue60Days) {
+			query.with(Sort.by(Sort.Direction.DESC, "ExcessValue60Days"));
+		}else if(excessValue90Days) {
+			query.with(Sort.by(Sort.Direction.DESC, "ExcessValue90Days"));
+		}else if(obsoleteQty) {
+			query.with(Sort.by(Sort.Direction.DESC, "ObsoleteQty"));
+		}else if(obsoleteValue) {
+			query.with(Sort.by(Sort.Direction.DESC, "ObsoleteValue"));
+		}else {
+			query.with(Sort.by(Sort.Direction.DESC, "value"));
+		}
 		
 		query.limit(limit);
 		
