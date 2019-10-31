@@ -20,7 +20,8 @@ export class HeatMapComponent implements OnInit {
   filteron: any;
   filterValue: string;
   dataFrom: any;
- 
+  excessBoolean:boolean
+  obsoleteBoolean:boolean
   check: boolean;
   showAlertDialog: boolean = false;
   ngOnInit(){
@@ -36,7 +37,17 @@ export class HeatMapComponent implements OnInit {
   //     console.log(this.message)
   //    }
   //   }
-
+    this.excessBoolean=false;
+    this.obsoleteBoolean=false;
+    for (let i of this.message){
+      if(i=="excessQty30Days" || i=="excessQty60Days" || i=="excessQty90Days"){
+        this.excessBoolean=true
+      }
+      if(i=="obsoleteValue"|| i=="obsoleteQty"){
+        this.obsoleteBoolean=true
+      }
+    }
+    
     if(this.message.length>0){  
       this.myData.getFiltered(this.message).subscribe(
         data => {
@@ -186,7 +197,6 @@ export class HeatMapComponent implements OnInit {
     .attr("transform", function(d, i) {
       if(count==0 && modx2==0){
         if((dx+x)<=width){
-          
           var f1="translate("+dx+"," + dy + ")";
           dx+=x;
           return f1;
@@ -264,7 +274,16 @@ export class HeatMapComponent implements OnInit {
     // PlantCode: "+d["plantCode"]+"<br> Material Desc: "+d["materialDescription"]+"<br>"
     // +"Demand 30 Days :"+d["demandFor30Days"]+"<br> Demand 60 Days : "+d["demandFor60Days"]+"<br>"
     // +" Demand 90 Days:"+d["demandFor90Days"]+
-    .html("<table border='1'><tr><th colspan='3' style='text-align:center;border-bottom: 1px solid #505050;'>Material No# " +d["materialNo"]+"</th></tr>"
+    // .html(function(){
+    //   console.log(this.excessBoolean)
+    //   if (this.excessBoolean) 
+    //     {return "Plant Casdasdaode"+d["plantCode"]}
+    //   else 
+    //   	{ return "Plant Code"+d["plantCode"] }
+      
+    // })
+    
+    .html("<table border='1' *ngIf='false' ><tr><th colspan='3' style='text-align:center;border-bottom: 1px solid #505050;'>Material No# " +d["materialNo"]+"</th></tr>"
      +"<tr><td style='font-weight: bold;'>Plant Code</td> <td>"+d["plantCode"]+"</td></tr>"
     +"<tr><td style='font-weight: bold;'>Material Description</td><td>"+d["materialDescription"]+"</td></tr>"
     +"<tr><td style='font-weight: bold;'>Demand 30Days</td> <td>"+d["demandFor30Days"]+"</td></tr>"
