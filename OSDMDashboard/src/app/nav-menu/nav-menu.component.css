@@ -23,9 +23,7 @@
     margin: 0 auto;
 }
 .scctText{
-    display: inline-block;
-    position: relative;
-    left: 25%; 
+    text-align: center;
 }
 .myclass {
     color: black;
