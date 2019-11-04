@@ -128,21 +128,25 @@ export class HeatMapComponent implements OnInit {
     var modx2=0;
     var loopcount=2
     var loopcount1=0
+    var counting=0
     var count1=0;
+    console.log(data.length)
     if(data.length%5==0){
       y=height/10;
       x=width/5;
     }
     //11 records so 4 arrangement
     else if(data.length%5==1){
-     modx2=5 * x/2;
-     loopcount1=2
-     temp=modx2;
-     var mod1=x*2;
-     count=1;
+      modx2=5 * x/2;
+      loopcount1=2
+      temp=modx2;
+      mod1=x*2;
+      count=1;
+      count1=1;
     }
     //12 records
     else if(data.length%5==2){
+      console.log("am inside")
       modx2=5 * x/2;
       loopcount1=2
       temp=modx2;
@@ -195,6 +199,7 @@ export class HeatMapComponent implements OnInit {
     .enter()
     .append("g")
     .attr("transform", function(d, i) {
+
       if(count==0 && modx2==0){
         if((dx+x)<=width){
           var f1="translate("+dx+"," + dy + ")";
@@ -230,6 +235,14 @@ export class HeatMapComponent implements OnInit {
           }
           return f1;
         }
+        else if((dx+mod1)>=width){
+          count--
+          dx=0;
+          dy+=y;
+          var f1="translate("+dx+"," + dy + ")";
+          dx+=mod1;
+          return f1;
+        }
       }
       
       
@@ -239,7 +252,7 @@ export class HeatMapComponent implements OnInit {
   .attr("width", function(d){
     if(loopcount1!=0){
       loopcount1--;
-      
+      counting+=1
       return temp;
     }
     else if(count1!=0){
