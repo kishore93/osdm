@@ -9,6 +9,8 @@
     background-color:#72a4d0;
     color: white;
     display: inline-block;
+    z-index: 1;
+    position: fixed;
     border-bottom: 1px solid #a59b9b;
 }
 #menu{
@@ -24,6 +26,7 @@
 .right-panel{
     width: 80%;
     float: right;
+    margin-top: 2%;
 }
 .scctText{
     text-align: center;
