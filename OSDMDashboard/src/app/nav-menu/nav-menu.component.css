@@ -12,15 +12,18 @@
     border-bottom: 1px solid #a59b9b;
 }
 #menu{
+    position: fixed;
+    padding-top: 3%;
+    padding-bottom: 0;
+    height: 100%;
     width: 20%;
-    height: 100vh;
-    float: left;    
-    border-right: 1px solid #a59b9b;
+    top: 0;
+    background-color: #eee;
 }
+
 .right-panel{
-    display: inline-block;
     width: 80%;
-    margin: 0 auto;
+    float: right;
 }
 .scctText{
     text-align: center;
@@ -66,15 +69,15 @@ mat-form-field{
     line-height: normal;
 }
 .excessUnit, .excessValue{
-    padding: 10% 10%;
+    padding: 9%;
     font-size: 10px;
     font-weight: 700;
 }
 .excessValue{
-    margin-top: 97%;
+    margin-top: 65%;
 }
 .days{
-    padding: 10%;;
+    padding: 16%;;
     font-size: 10px;
     font-weight: 700;
 }

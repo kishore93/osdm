@@ -118,6 +118,9 @@ export class NavMenuComponent implements OnInit {
     this.isClicked6=false;
     this.isClicked14=false;
     this.isClicked17=false;
+    console.log("hi");
+    var svgTitle = "E&O Inventory Absolute Quantity Report";
+    console.log("Out");
     
    }
    productionOrder(){
@@ -420,7 +423,10 @@ export class NavMenuComponent implements OnInit {
       this.buttonBoolean=false
     }
     this.isClicked9=false;
+    console.log("hi");
+    var svgTitle = "E&O Inventory Absolute Quantity Report";
   }
+
   obsoleteValueMethod(){
     this.isClicked8=false
     this.isClicked9 = !this.isClicked9;
@@ -430,6 +436,9 @@ export class NavMenuComponent implements OnInit {
     else{
       this.buttonBoolean=false
     }
+
+    console.log("hi");
+    var svgTitle = "E&O Inventory Absolute Value Report";
   }
  
 

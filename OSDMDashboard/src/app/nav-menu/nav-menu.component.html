@@ -3,7 +3,6 @@
         <h3 class="scctText">Control Tower</h3>
     </div>
     <div id="menu">
-        <br>
         <div class="container-fluid">
             <form [formGroup]="myForm">
             <div class="row">
@@ -112,7 +111,7 @@
                             display: inline-block;">
                                 <button style="margin-left: 0;
                                 margin-right:0; 
-                                padding: 15% 5%;" class="obsolClass" (click)="obsoleteValueMethod()" [class.myClass]="isClicked9" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>Obsolete value</button>
+                                padding: 8% 5%;" class="obsolClass" (click)="obsoleteValueMethod()" [class.myClass]="isClicked9" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>Obsolete value</button>
                             </div>
                         </div>
                     </div>
@@ -120,10 +119,10 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <button id="demand" (click)="isClicked1 = !isClicked1" [class.myClass]="isClicked1" [style.background-color]="toggle ? 'green' : 'red'" (click)="callfun5()" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>Demand</button>
+                <button id="demand" disabled (click)="isClicked1 = !isClicked1" [class.myClass]="isClicked1" [style.background-color]="toggle ? 'green' : 'red'" (click)="callfun5()" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>Demand</button>
             </div>
             <div class="col-md-4">
-                <button id="production-order" (click)="isClicked2 = !isClicked2" [class.myClass]="isClicked2" [style.background-color]="toggle ? 'green' : 'red'" (click)="productionOrder()" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>Production Order</button>
+                <button id="production-order" disabled (click)="isClicked2 = !isClicked2" [class.myClass]="isClicked2" [style.background-color]="toggle ? 'green' : 'red'" (click)="productionOrder()" mdbBtn type="button" color="light" rounded="true" mdbWavesEffect>Production Order</button>
             </div>
         </div>
         <!-- <div class="row form-group button-group">

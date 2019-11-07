@@ -8,6 +8,7 @@ import { HostListener } from "@angular/core";
   templateUrl: './heat-map.component.html',
   styleUrls: ['./heat-map.component.css']
 })
+
 export class HeatMapComponent implements OnInit {
   screenWidth
   screenHeight
@@ -20,10 +21,12 @@ export class HeatMapComponent implements OnInit {
   filteron: any;
   filterValue: string;
   dataFrom: any;
-  excessBoolean:boolean
-  obsoleteBoolean:boolean
+  excessBoolean:boolean;
+  obsoleteBoolean:boolean;
   check: boolean;
   showAlertDialog: boolean = false;
+  svgTitle2 : any;
+  svgTitle : any = "E&O Inventory Top 50 Records Report";
   ngOnInit(){
     
   }
@@ -41,10 +44,23 @@ export class HeatMapComponent implements OnInit {
     this.obsoleteBoolean=false;
     for (let i of this.message){
       if(i=="excessQty30Days" || i=="excessQty60Days" || i=="excessQty90Days"){
-        this.excessBoolean=true
+        this.excessBoolean=true;
+        this.svgTitle2="E&O Inventory Excess Quantity Report";
+        this.svgTitle = '';
+      }
+      if(i=="excessValue30Days" || i=="excessValue60Days" || i=="excessValue90Days"){
+        this.svgTitle2="E&O Inventory Excess Value Report";
       }
       if(i=="obsoleteValue"|| i=="obsoleteQty"){
-        this.obsoleteBoolean=true
+        this.obsoleteBoolean=true;
+        if(i=="obsoleteValue"){
+          this.svgTitle2="E&O Inventory Absolute Value Report";
+        }
+        if(i=="obsoleteQty"){
+          this.svgTitle2="E&O Inventory Absolute Quantity Report";
+        }
+        
+        this.svgTitle = '';
       }
     }
     
@@ -56,6 +72,7 @@ export class HeatMapComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           console.log (err.message);
+          console.log("No Records found");
         }
       );
     }
@@ -68,6 +85,7 @@ export class HeatMapComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           console.log (err.message);
+          console.log("No Records found");
         }
       );
     }
@@ -108,7 +126,7 @@ export class HeatMapComponent implements OnInit {
     .style("background-color","#D3D3D3");
     var width = this.screenWidth*77/100;
     console.log(width)
-    var height = 550;
+    var height = 495;
     //var y=this.calculateValues(area,data.length)
     
     var dataLength=data.length;
@@ -179,9 +197,10 @@ export class HeatMapComponent implements OnInit {
 
     var myColor = d3.scaleLinear().domain([minVal,maxVal])
     //remove this line and add after compiling
-    .range(["#fff","red"])
+    .range(["#fff","red"]);
                   
   
+
     var expensesAvgAmount = d3.nest()
     .key(function(d) { return d["region"]; })
     .key(function(d){ return d["state"]})
@@ -317,4 +336,7 @@ export class HeatMapComponent implements OnInit {
   }
   
   textcolor=d3.selectAll("text").attr("fill", "white");
+
+  
+
   }
