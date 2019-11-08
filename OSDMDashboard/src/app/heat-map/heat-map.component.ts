@@ -26,7 +26,7 @@ export class HeatMapComponent implements OnInit {
   check: boolean;
   showAlertDialog: boolean = false;
   svgTitle2 : any;
-  svgTitle : any = "E&O Inventory Top 50 Records Report";
+  svgTitle : any = "Inventory Top 50 Records Report";
   ngOnInit(){
     
   }
