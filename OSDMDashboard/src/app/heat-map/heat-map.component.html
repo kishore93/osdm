@@ -1,11 +1,12 @@
 <div id="my_dataviz"></div>
-<div class="d3class">
-    <div id="svgTitle" style="display: inline-block;
+<div id="svgTitle" style="display: inline-block;
     text-align: left;
     font-size: 1.75rem;
     font-family: helivertica arial;
     font-weight: 600;
     padding-left: 5px;" *ngIf="message!=''">{{svgTitle2}}</div>
+<div class="d3class" *ngIf="!noRecordsFound">
+    
      <div id="svgTitle" style="display: inline-block;
      text-align: left;
      font-size: 1.75rem;
@@ -14,3 +15,7 @@
      padding-left: 5px;" *ngIf="message">{{svgTitle}}</div>
     <svg id="mydiv"></svg>
 </div>
+<div *ngIf="noRecordsFound"><h1>No Records found</h1></div>
+<!-- <span style='font-size:100px;'>&#128542;</span>
+<font face="Segoe UI Symbol">&#x1f604;</font><br><br>
+<font face="Arial">&#x1f604;</font> -->

@@ -19,9 +19,12 @@ export class HeatMapComponent implements OnInit {
   }
   @Input() message?: any;
   filteron: any;
+  noRecordsFound:boolean
   filterValue: string;
   dataFrom: any;
-  excessBoolean:boolean;
+  excessBooleanQty:string;
+  excessBooleanVal:string;
+  obsoleteBooleanCheck:string
   obsoleteBoolean:boolean;
   check: boolean;
   showAlertDialog: boolean = false;
@@ -40,19 +43,22 @@ export class HeatMapComponent implements OnInit {
   //     console.log(this.message)
   //    }
   //   }
-    this.excessBoolean=false;
+    this.excessBooleanQty="";
+    this.excessBooleanVal=""
     this.obsoleteBoolean=false;
     for (let i of this.message){
       if(i=="excessQty30Days" || i=="excessQty60Days" || i=="excessQty90Days"){
-        this.excessBoolean=true;
+        this.excessBooleanQty="excessQty";
         this.svgTitle2="E&O Inventory Excess Quantity Report";
         this.svgTitle = '';
       }
       if(i=="excessValue30Days" || i=="excessValue60Days" || i=="excessValue90Days"){
         this.svgTitle2="E&O Inventory Excess Value Report";
+        this.excessBooleanVal="excessVal"
       }
       if(i=="obsoleteValue"|| i=="obsoleteQty"){
         this.obsoleteBoolean=true;
+        this.obsoleteBooleanCheck="obsolete"
         if(i=="obsoleteValue"){
           this.svgTitle2="E&O Inventory Absolute Value Report";
         }
@@ -67,8 +73,21 @@ export class HeatMapComponent implements OnInit {
     if(this.message.length>0){  
       this.myData.getFiltered(this.message).subscribe(
         data => {
-        
-          this.main(data);
+          console.log(data.length)
+          this.noRecordsFound=false
+          if(data.length==0){
+            this.noRecordsFound=true
+          }
+          if(this.excessBooleanQty!=""){
+            this.main(data,this.excessBooleanQty);
+          }
+          else if(this.excessBooleanVal!=""){
+            this.main(data,this.excessBooleanVal);
+          }
+          else if(this.obsoleteBooleanCheck!=""){
+            this.main(data,this.obsoleteBooleanCheck);
+          }
+          
         },
         (err: HttpErrorResponse) => {
           console.log (err.message);
@@ -101,8 +120,8 @@ export class HeatMapComponent implements OnInit {
   // return width
   // }
 
-  main(data) {
-    
+  main(data,checking?: string) {
+    // console.log(data)
     var maxVal=0 
     var minVal=100000000;
   
@@ -302,26 +321,52 @@ export class HeatMapComponent implements OnInit {
   .on("mouseover", function(){return tooltip.style("visibility", "visible");})
   .on("click", function(d){return tooltip.style("top", (d3.event.pageY-10)+"px")
     .style("left",(d3.event.pageX+10)+"px")
-    // .text("PlantCode: "+d["plantCode"]+"Material Desc: "+d["materialDescription"]+" Demand 30 Days :"+d["demandFor30Days"]+" Demand 60 Days : "+d["demandFor60Days"]+" Demand 90 Days:"+d["demandFor90Days"])
-    // PlantCode: "+d["plantCode"]+"<br> Material Desc: "+d["materialDescription"]+"<br>"
-    // +"Demand 30 Days :"+d["demandFor30Days"]+"<br> Demand 60 Days : "+d["demandFor60Days"]+"<br>"
-    // +" Demand 90 Days:"+d["demandFor90Days"]+
-    // .html(function(){
-    //   console.log(this.excessBoolean)
-    //   if (this.excessBoolean) 
-    //     {return "Plant Casdasdaode"+d["plantCode"]}
-    //   else 
-    //   	{ return "Plant Code"+d["plantCode"] }
+
+
+    .html(function(){
+      console.log(checking)
+      if (checking=="excessQty") 
+        {return "<table border='1' *ngIf='false' ><tr><th colspan='3' style='text-align:center;border-bottom: 1px solid #505050;'>Material No# " +d["materialNo"]+"</th></tr>"
+        +"<tr><td style='font-weight: bold;'>Plant Code</td> <td>"+d["plantCode"]+"</td></tr>"
+       +"<tr><td style='font-weight: bold;'>Material Description</td><td>"+d["materialDescription"]+"</td></tr>"
+       +"<tr><td style='font-weight: bold;'>excess Quantity 30Days</td> <td>"+d["excessQuantityFor30Days"]+"</td></tr>"
+       +"<tr><td style='font-weight: bold;'>excess Quantity 60Days</td> <td>"+d["excessQuantityFor60Days"]+"</td></tr>"
+       +"<tr><td style='font-weight: bold;'>excess Quantity 90Days</td> <td>"+d["excessQuantityFor90Days"]+"</td></tr>"
+       +"</table>"}
+       else if (checking=="excessVal") 
+        {return "<table border='1' *ngIf='false' ><tr><th colspan='3' style='text-align:center;border-bottom: 1px solid #505050;'>Material No# " +d["materialNo"]+"</th></tr>"
+        +"<tr><td style='font-weight: bold;'>Plant Code</td> <td>"+d["plantCode"]+"</td></tr>"
+       +"<tr><td style='font-weight: bold;'>Material Description</td><td>"+d["materialDescription"]+"</td></tr>"
+       +"<tr><td style='font-weight: bold;'>excess Value 30Days</td> <td>"+d["excessValueFor30Days"]+"</td></tr>"
+       +"<tr><td style='font-weight: bold;'>excess Value 60Days</td> <td>"+d["excessValueFor60Days"]+"</td></tr>"
+       +"<tr><td style='font-weight: bold;'>excess Value 90Days</td> <td>"+d["excessValueFor90Days"]+"</td></tr>"
+       +"</table>"}
+       else if (checking=="obsolete") 
+        {return "<table border='1' *ngIf='false' ><tr><th colspan='3' style='text-align:center;border-bottom: 1px solid #505050;'>Material No# " +d["materialNo"]+"</th></tr>"
+        +"<tr><td style='font-weight: bold;'>Plant Code</td> <td>"+d["plantCode"]+"</td></tr>"
+       +"<tr><td style='font-weight: bold;'>Material Description</td><td>"+d["materialDescription"]+"</td></tr>"
+       +"<tr><td style='font-weight: bold;'>obsolete Qty</td> <td>"+d["obsoleteQty"]+"</td></tr>"
+       +"<tr><td style='font-weight: bold;'>obsolete  Value</td> <td>"+d["obsoleteValue"]+"</td></tr>"
+       +"</table>"}
       
-    // })
+       else 
+      	{ return "<table border='1' *ngIf='false' ><tr><th colspan='3' style='text-align:center;border-bottom: 1px solid #505050;'>Material No# " +d["materialNo"]+"</th></tr>"
+        +"<tr><td style='font-weight: bold;'>Plant Code</td> <td>"+d["plantCode"]+"</td></tr>"
+       +"<tr><td style='font-weight: bold;'>Material Description</td><td>"+d["materialDescription"]+"</td></tr>"
+       +"<tr><td style='font-weight: bold;'>Demand 30Days</td> <td>"+d["demandFor30Days"]+"</td></tr>"
+       +"<tr><td style='font-weight: bold;'>Demand 60Days</td> <td>"+d["demandFor60Days"]+"</td></tr>"
+       +"<tr><td style='font-weight: bold;'>Demand 90Days</td> <td>"+d["demandFor90Days"]+"</td></tr>"
+       +"</table>"}
+      
+    })
     
-    .html("<table border='1' *ngIf='false' ><tr><th colspan='3' style='text-align:center;border-bottom: 1px solid #505050;'>Material No# " +d["materialNo"]+"</th></tr>"
-     +"<tr><td style='font-weight: bold;'>Plant Code</td> <td>"+d["plantCode"]+"</td></tr>"
-    +"<tr><td style='font-weight: bold;'>Material Description</td><td>"+d["materialDescription"]+"</td></tr>"
-    +"<tr><td style='font-weight: bold;'>Demand 30Days</td> <td>"+d["demandFor30Days"]+"</td></tr>"
-    +"<tr><td style='font-weight: bold;'>Demand 60Days</td> <td>"+d["demandFor60Days"]+"</td></tr>"
-    +"<tr><td style='font-weight: bold;'>Demand 90Days</td> <td>"+d["demandFor90Days"]+"</td></tr>"
-    +"</table>")
+    // .html("<table border='1' *ngIf='false' ><tr><th colspan='3' style='text-align:center;border-bottom: 1px solid #505050;'>Material No# " +d["materialNo"]+"</th></tr>"
+    //  +"<tr><td style='font-weight: bold;'>Plant Code</td> <td>"+d["plantCode"]+"</td></tr>"
+    // +"<tr><td style='font-weight: bold;'>Material Description</td><td>"+d["materialDescription"]+"</td></tr>"
+    // +"<tr><td style='font-weight: bold;'>Demand 30Days</td> <td>"+d["demandFor30Days"]+"</td></tr>"
+    // +"<tr><td style='font-weight: bold;'>Demand 60Days</td> <td>"+d["demandFor60Days"]+"</td></tr>"
+    // +"<tr><td style='font-weight: bold;'>Demand 90Days</td> <td>"+d["demandFor90Days"]+"</td></tr>"
+    // +"</table>")
     .style("padding","1%")
     .style("opacity","1");})
     .on("mouseout", function(){return tooltip.style("visibility", "hidden");});  
