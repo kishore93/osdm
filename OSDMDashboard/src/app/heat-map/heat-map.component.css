@@ -7,3 +7,12 @@ svgclass{
     width: 100% !important;
     height: 100vh;
 }
+.noRecords{
+    position: relative;
+    left: 38%;
+}
+img{
+    width: 8%;
+    position: relative;
+    left: 5%;
+}

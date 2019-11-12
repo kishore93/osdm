@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HeatMapComponent } from './heat-map/heat-map.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-
+import { EmojiModule } from 'angular-emoji/dist';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +29,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     MatInputModule,
     MatSelectModule,
     MatExpansionModule,
-    MDBBootstrapModule
+    MDBBootstrapModule,
+    EmojiModule
   ],
   providers: [],
   bootstrap: [AppComponent]
