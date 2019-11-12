@@ -8,11 +8,11 @@ svgclass{
     height: 100vh;
 }
 .noRecords{
-    position: relative;
-    left: 38%;
+    text-align: center;
+    border: 1px solid #dddddd;
 }
-img{
-    width: 8%;
-    position: relative;
-    left: 5%;
+.noRecords img {
+    width: 5% !important;
+    left: 0;
 }
+
