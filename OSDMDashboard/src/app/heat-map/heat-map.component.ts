@@ -72,7 +72,7 @@ export class HeatMapComponent implements OnInit {
     
     if(this.message.length>0){  
       this.myData.getFiltered(this.message).subscribe(
-        data => {
+        (data:any[]) => {
           console.log(data.length)
           this.noRecordsFound=false
           if(data.length==0){
