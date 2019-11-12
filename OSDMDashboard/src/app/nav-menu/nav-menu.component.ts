@@ -423,8 +423,6 @@ export class NavMenuComponent implements OnInit {
       this.buttonBoolean=false
     }
     this.isClicked9=false;
-    console.log("hi");
-    var svgTitle = "E&O Inventory Absolute Quantity Report";
   }
 
   obsoleteValueMethod(){
@@ -436,9 +434,6 @@ export class NavMenuComponent implements OnInit {
     else{
       this.buttonBoolean=false
     }
-
-    console.log("hi");
-    var svgTitle = "E&O Inventory Absolute Value Report";
   }
  
 
