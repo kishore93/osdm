@@ -40,7 +40,7 @@ export class NavMenuComponent implements OnInit {
   isClicked6:boolean = false;
   isClicked7:boolean = false;
   isClicked8:boolean = false;
-
+  buttonBooleanError:boolean;
   buttonBoolean:boolean=false;
   isClicked9:boolean = false;
   isClicked17:boolean=false;
@@ -254,6 +254,7 @@ export class NavMenuComponent implements OnInit {
   }
   //onclick of generate heatmap
   servicehit(){
+    this.buttonBooleanError=false;
     this.newArray=[]
     if(this.myForm.controls.region.value){
       this.newArray.push("region")
@@ -439,6 +440,9 @@ export class NavMenuComponent implements OnInit {
 
     console.log("hi");
     var svgTitle = "E&O Inventory Absolute Value Report";
+  }
+  disabledHeatMap(){
+    this.buttonBooleanError=true
   }
  
 

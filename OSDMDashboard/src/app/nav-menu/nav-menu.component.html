@@ -57,7 +57,10 @@
                 </div>
             </div>
             <br>
-                <button class="btn generateHeatmap" *ngIf="buttonBoolean" (click)="servicehit()">Generate HeatMap</button> 
+            <div (click)="disabledHeatMap()">
+                <button class="btn generateHeatmap" [disabled]="!buttonBoolean" (click)="servicehit()">Generate HeatMap</button>
+            </div>
+            <small *ngIf="buttonBooleanError && !buttonBoolean" style="color: red">*Please select excess or obsolete from E&O Inventory</small> 
             </form>
         </div>
     </div>

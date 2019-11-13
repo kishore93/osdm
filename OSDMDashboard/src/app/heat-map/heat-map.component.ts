@@ -326,31 +326,31 @@ export class HeatMapComponent implements OnInit {
     .html(function(){
       console.log(checking)
       if (checking=="excessQty") 
-        {return "<table border='1' *ngIf='false' ><tr><th colspan='3' style='text-align:center;border-bottom: 1px solid #505050;'>Material No# " +d["materialNo"]+"</th></tr>"
+        {return "<table class='table table-bordered' style='margin-bottom: 0;' *ngIf='false' ><tr><th colspan='3' style='text-align:center;border-bottom: 1px solid #505050;'>Material No# " +d["materialNo"]+"</th></tr>"
         +"<tr><td style='font-weight: bold;'>Plant Code</td> <td>"+d["plantCode"]+"</td></tr>"
        +"<tr><td style='font-weight: bold;'>Material Description</td><td>"+d["materialDescription"]+"</td></tr>"
-       +"<tr><td style='font-weight: bold;'>excess Quantity 30Days</td> <td>"+d["excessQuantityFor30Days"]+"</td></tr>"
-       +"<tr><td style='font-weight: bold;'>excess Quantity 60Days</td> <td>"+d["excessQuantityFor60Days"]+"</td></tr>"
-       +"<tr><td style='font-weight: bold;'>excess Quantity 90Days</td> <td>"+d["excessQuantityFor90Days"]+"</td></tr>"
+       +"<tr><td style='font-weight: bold;'>Excess Quantity 30Days</td> <td>"+d["excessQuantityFor30Days"]+"</td></tr>"
+       +"<tr><td style='font-weight: bold;'>Excess Quantity 60Days</td> <td>"+d["excessQuantityFor60Days"]+"</td></tr>"
+       +"<tr><td style='font-weight: bold;'>Excess Quantity 90Days</td> <td>"+d["excessQuantityFor90Days"]+"</td></tr>"
        +"</table>"}
        else if (checking=="excessVal") 
-        {return "<table border='1' *ngIf='false' ><tr><th colspan='3' style='text-align:center;border-bottom: 1px solid #505050;'>Material No# " +d["materialNo"]+"</th></tr>"
+        {return "<table class='table table-bordered' style='margin-bottom: 0;' *ngIf='false' ><tr><th colspan='3' style=' border-radius: 5px; text-align:center;border-bottom: 1px solid #505050;'>Material No# " +d["materialNo"]+"</th></tr>"
         +"<tr><td style='font-weight: bold;'>Plant Code</td> <td>"+d["plantCode"]+"</td></tr>"
        +"<tr><td style='font-weight: bold;'>Material Description</td><td>"+d["materialDescription"]+"</td></tr>"
-       +"<tr><td style='font-weight: bold;'>excess Value 30Days</td> <td>"+d["excessValueFor30Days"]+"</td></tr>"
-       +"<tr><td style='font-weight: bold;'>excess Value 60Days</td> <td>"+d["excessValueFor60Days"]+"</td></tr>"
-       +"<tr><td style='font-weight: bold;'>excess Value 90Days</td> <td>"+d["excessValueFor90Days"]+"</td></tr>"
+       +"<tr><td style='font-weight: bold;'>Excess Value 30Days</td> <td>"+d["excessValueFor30Days"]+"</td></tr>"
+       +"<tr><td style='font-weight: bold;'>Excess Value 60Days</td> <td>"+d["excessValueFor60Days"]+"</td></tr>"
+       +"<tr><td style='font-weight: bold;'>Excess Value 90Days</td> <td>"+d["excessValueFor90Days"]+"</td></tr>"
        +"</table>"}
        else if (checking=="obsolete") 
-        {return "<table border='1' *ngIf='false' ><tr><th colspan='3' style='text-align:center;border-bottom: 1px solid #505050;'>Material No# " +d["materialNo"]+"</th></tr>"
+        {return "<table class='table table-bordered' style='margin-bottom: 0;' *ngIf='false' ><tr><th colspan='3' style=' border-radius: 5px; text-align:center;border-bottom: 1px solid #505050;'>Material No# " +d["materialNo"]+"</th></tr>"
         +"<tr><td style='font-weight: bold;'>Plant Code</td> <td>"+d["plantCode"]+"</td></tr>"
        +"<tr><td style='font-weight: bold;'>Material Description</td><td>"+d["materialDescription"]+"</td></tr>"
-       +"<tr><td style='font-weight: bold;'>obsolete Qty</td> <td>"+d["obsoleteQty"]+"</td></tr>"
-       +"<tr><td style='font-weight: bold;'>obsolete  Value</td> <td>"+d["obsoleteValue"]+"</td></tr>"
+       +"<tr><td style='font-weight: bold;'>Obsolete Qty</td> <td>"+d["obsoleteQty"]+"</td></tr>"
+       +"<tr><td style='font-weight: bold;'>Obsolete  Value</td> <td>"+d["obsoleteValue"]+"</td></tr>"
        +"</table>"}
       
        else 
-      	{ return "<table border='1' *ngIf='false' ><tr><th colspan='3' style='text-align:center;border-bottom: 1px solid #505050;'>Material No# " +d["materialNo"]+"</th></tr>"
+      	{ return "<table class='table table-bordered' style='margin-bottom: 0;' *ngIf='false' ><tr><th colspan='3' style=' border-radius: 5px; text-align:center;border-bottom: 1px solid #505050;'>Material No# " +d["materialNo"]+"</th></tr>"
         +"<tr><td style='font-weight: bold;'>Plant Code</td> <td>"+d["plantCode"]+"</td></tr>"
        +"<tr><td style='font-weight: bold;'>Material Description</td><td>"+d["materialDescription"]+"</td></tr>"
        +"<tr><td style='font-weight: bold;'>Demand 30Days</td> <td>"+d["demandFor30Days"]+"</td></tr>"
@@ -368,7 +368,8 @@ export class HeatMapComponent implements OnInit {
     // +"<tr><td style='font-weight: bold;'>Demand 90Days</td> <td>"+d["demandFor90Days"]+"</td></tr>"
     // +"</table>")
     .style("padding","1%")
-    .style("opacity","1");})
+    .style("opacity","1")
+    .style("border-radius","15px");})
     .on("mouseout", function(){return tooltip.style("visibility", "hidden");});  
   }
   
