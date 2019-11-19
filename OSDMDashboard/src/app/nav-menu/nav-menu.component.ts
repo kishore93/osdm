@@ -55,6 +55,7 @@ export class NavMenuComponent implements OnInit {
   public show5:boolean = false;
 
   callfun() {
+    // this.buttonBoolean=true
     this.show2=false
     this.show1=false;
     this.show5 = false;
