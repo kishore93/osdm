@@ -166,7 +166,7 @@ public class ApiService {
 			query.addCriteria(Criteria.where("MaterialNo").is(materialNo));
 		}
 		
-		if(excessQty30Days) {
+		/*if(excessQty30Days) {
 			query.with(Sort.by(Sort.Direction.DESC, "ExcessQty30Days"));
 		} else if(excessQty60Days) {
 			query.with(Sort.by(Sort.Direction.DESC, "ExcessQty60Days"));
@@ -184,7 +184,9 @@ public class ApiService {
 			query.with(Sort.by(Sort.Direction.DESC, "ObsoleteValue"));
 		}else {
 			query.with(Sort.by(Sort.Direction.DESC, "value"));
-		}
+		}*/
+		
+		query.with(Sort.by(Sort.Direction.DESC, "value"));
 		
 		query.limit(limit);
 		
