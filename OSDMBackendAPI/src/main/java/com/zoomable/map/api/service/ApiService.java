@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
@@ -192,5 +196,66 @@ public class ApiService {
 		
 		return template.find(query, InventoryModel.class);
 		
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public List<Map> plantVersusExcessValue() {
+		Aggregation agg = Aggregation.newAggregation(
+					Aggregation.project("plantCode","totalExcessValue"),
+					Aggregation.group("plantCode").sum("totalExcessValue").as("Total E&O Value ($)"),
+					Aggregation.sort(new Sort(Direction.DESC, "_id"))
+				);
+				
+		List<Map> data = template.aggregate(agg, InventoryModel.class, Map.class).getMappedResults();
+
+		double sum = 0;
+		
+		for (Map record : data) {
+			sum += (double) record.get("Total E&O Value ($)");
+		}
+		
+		for (Map record : data) {
+			Object obj = record.remove("_id");
+			record.put("Plant Code", obj);
+			record.put("Percentage", (((double) record.get("Total E&O Value ($)"))/sum) * 100);
+		}
+				
+		return data;
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public List<Map> plantVersusExcessQty() {
+		Aggregation agg = Aggregation.newAggregation(
+					Aggregation.project("plantCode","totalExcessQty"),
+					Aggregation.group("plantCode").sum("totalExcessQty").as("Total E&O Units"),
+					Aggregation.sort(new Sort(Direction.DESC, "_id"))
+				);
+				
+		List<Map> data = template.aggregate(agg, InventoryModel.class, Map.class).getMappedResults();
+
+		int sum = 0;
+		
+		for (Map record : data) {
+			sum += (int) record.get("Total E&O Units");
+		}
+		
+		for (Map record : data) {
+			Object obj = record.remove("_id");
+			record.put("Plant Code", obj);
+			record.put("Percentage", new Double((int) record.get("Total E&O Units"))/sum * 100);
+		}
+				
+		return data;
+	}
+
+	@SuppressWarnings("rawtypes")
+	public List<Map> top10MaterialsWithHighestDemand() {
+				
+		return template.aggregate(Aggregation.newAggregation(
+					
+					Aggregation.sort(new Sort(Direction.DESC, "annualDemand")),
+					Aggregation.limit(10)
+					
+				), InventoryModel.class, Map.class).getMappedResults();
 	}
 }

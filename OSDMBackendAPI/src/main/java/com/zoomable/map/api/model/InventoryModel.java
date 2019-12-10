@@ -50,6 +50,9 @@ public class InventoryModel {
 
 	@Field(value = "ExcessQty90Days")
 	private double excessQuantityFor90Days;
+	
+	@Field(value = "TotalExcessQty")
+	private double totalExcessQty;
 
 	@Field(value = "ExcessValue30Days")
 	private double excessValueFor30Days;
@@ -59,6 +62,9 @@ public class InventoryModel {
 
 	@Field(value = "ExcessValue90Days")
 	private double excessValueFor90Days;
+	
+	@Field(value = "TotalExcessValue")
+	private double totalExcessValue;
 
 	@Field(value = "ObsoleteQty")
 	private double obsoleteQty;
