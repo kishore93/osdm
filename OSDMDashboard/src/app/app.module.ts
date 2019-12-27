@@ -10,11 +10,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeatMapComponent } from './heat-map/heat-map.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { EmojiModule } from 'angular-emoji/dist';
+import { HomeComponent } from './home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HeatMapComponent
+    HeatMapComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

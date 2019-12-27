@@ -46,7 +46,7 @@ export class NavMenuComponent implements OnInit {
   isClicked17:boolean=false;
   isClicked18:boolean=false;
   isClicked14:boolean=false
-
+  homeBoolean:boolean=true;
   public show:boolean = false;
   public show1:boolean = false;
   public show2:boolean = false;
@@ -255,6 +255,7 @@ export class NavMenuComponent implements OnInit {
   }
   //onclick of generate heatmap
   servicehit(){
+    this.homeBoolean=false;
     this.buttonBooleanError=false;
     this.newArray=[]
     if(this.myForm.controls.region.value){

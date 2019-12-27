@@ -192,11 +192,11 @@
                 </div>
                 </div>
             </div> -->
-            <div class="heatmapcls" *ngIf="newArray; else loggedOut">
-                <app-heat-map [message]="newArray">loading please wait</app-heat-map>
+            <div *ngIf="homeBoolean; else loggedOut">
+                <app-home></app-home>
             </div>
-            <ng-template #loggedOut>
-                <app-heat-map  [message]="">loading please wait</app-heat-map>
+            <ng-template class="heatmapcls" #loggedOut>
+                <app-heat-map [message]="newArray">loading please wait</app-heat-map>
             </ng-template>
         </div>
                 <!-- <table>
