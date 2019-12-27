@@ -23,7 +23,7 @@ public interface ApiRepository extends MongoRepository<InventoryModel, ObjectId>
 
 	public List<InventoryModel> findByRegionAndStateAndPlantCodeAndMaterialNo(String region, String state,
 			String plantCode, String materialNumber);
-
+	
 	/*@Query(value = "{'Region' : ?0}", sort = "{'value':-1}")
 	public List<InventoryModel> findTopLimitByRegion(String region, PageRequest pageRequest);
 

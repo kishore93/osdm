@@ -1,6 +1,7 @@
 package com.zoomable.map.api.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -224,5 +225,24 @@ public class ApiController {
 			@RequestParam(value = "plantCode", required = false) String plantCode) {
 		return service.retrieveDistinctMaterialNumbers(region, state, plantCode);
 	}
+	
+	@SuppressWarnings("rawtypes")
+	@GetMapping(value = "/plant-vs-excess-value", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Map> retrievePlantVersusExecessValue() {
+		return service.plantVersusExcessValue();
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@GetMapping(value = "/plant-vs-excess-units", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Map> retrievePlantVersusExecessUnits() {
+		return service.plantVersusExcessQty();
+	}
 
+	@SuppressWarnings("rawtypes")
+	@GetMapping(value = "/materials-with-high-demand", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Map> retrieveTop10MaterialsWithHighestDemand(){
+		return service.top10MaterialsWithHighestDemand();
+		
+	}
+	
 }
