@@ -67,7 +67,9 @@ mat-form-field{
 .borderless{
     border: none;
 }
-
+.heatmapcls{
+    margin-top: 2%;
+}
 .excessbutton{
     line-height: normal;
 }
