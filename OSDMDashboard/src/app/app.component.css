@@ -1,0 +1,14 @@
+
+#nav{
+    margin: 0 auto;
+    background-color:#72a4d0;
+    color: white;
+    z-index: 1;
+    position: fixed;
+    border-bottom: 1px solid #a59b9b;
+    width: 100%;
+    display: inline-block;
+}
+.scctText{
+    text-align: center;
+}

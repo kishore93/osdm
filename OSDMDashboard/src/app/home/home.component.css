@@ -9,3 +9,9 @@ text {
       fill: orange;
       stroke: white;
   }
+  .heatmapLink{
+    width: 7%;
+    text-decoration: underline;
+    position: relative;
+    float: right;
+  }
