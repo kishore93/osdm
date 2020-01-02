@@ -148,6 +148,7 @@ barchart(){
  
 private createChart(): void {
   const element = this.chartContainer.nativeElement;
+  console.log(element)
   const data = this.data1;
 
   const svg = d3.select(element).append('svg')
@@ -162,12 +163,11 @@ private createChart(): void {
     .rangeRound([0, contentWidth])
     .padding(0.1)
     .domain(data.map(d => d.letter));
-
   const y = d3
     .scaleLinear()
     .rangeRound([contentHeight, 0])
     .domain([0, d3.max(data,d => d.frequency)]);
-
+    // console.log(y(50),contentHeight)
   const g = svg.append('g')
     .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
 
@@ -178,7 +178,7 @@ private createChart(): void {
 
   g.append('g')
     .attr('class', 'axis axis--y')
-    .call(d3.axisLeft(y).ticks(5, '%'))
+    .call(d3.axisLeft(y).ticks(5))
     .append('text')
       .attr('transform', 'rotate(-90)')
       .attr('y', 6)
@@ -266,7 +266,7 @@ private createChartDouble(): void {
 
   g.append('g')
     .attr('class', 'axis axis--y')
-    .call(d3.axisLeft(y).ticks(5, '%'))
+    .call(d3.axisLeft(y).ticks(5))
     .append('text')
       .attr('transform', 'rotate(-90)')
       .attr('y', 6)
