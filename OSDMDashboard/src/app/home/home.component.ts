@@ -88,7 +88,7 @@ piechart2(){
 	.enter()
 	.append('path')
   .attr('d', <any>arcGenerator)
-  .attr("fill",function(d){return colors(<any>d.startAngle);});;
+  .attr("fill",function(d){return colors(<any>d.startAngle);});
 
   d3.select('#pie2')
 	.selectAll('text')
@@ -115,7 +115,7 @@ barchart(){
           .padding(0.2);
   var x = d3.scaleLinear()
   .range([0, width]);
-  
+
   var svg = d3.select("#svg1").append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
