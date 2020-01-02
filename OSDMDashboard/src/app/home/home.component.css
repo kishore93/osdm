@@ -36,3 +36,25 @@ text {
   font-family: serif;
   font-weight: bold;
 }
+
+.pieChart-title{
+  width: 100%;
+  margin: 0 auto;
+  display: inline-block;
+}
+.title-1{
+  float: left;
+    display: inline-block;
+    margin-left: 13%;
+    font-size: 15px;
+    font-family: serif;
+    font-weight: bold;
+}
+.title-2{
+  font-size: 15px;
+  font-family: serif;
+  display: block;
+  font-weight: bold;
+  float: right;
+  margin-right: 16%;
+}

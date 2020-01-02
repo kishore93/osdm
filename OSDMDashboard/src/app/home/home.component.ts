@@ -100,9 +100,15 @@ piechart2(){
 		d3.select(this)
 			.attr('x', centroid[0])
 			.attr('y', centroid[1])
-			.attr('dy', '0.33em')
+      .attr('dy', '0.33em')
+      
 			.text(d.label).style("fill","white").style("font-size","10px");
-	});
+  })
+  .attr("text-anchor", function(d) {
+    // are we past the center?
+    return (d.endAngle + d.startAngle)/2 > Math.PI ?
+        "end" : "start";
+});
 }
 barchart(){
   const element=this.chartContainer1.nativeElement;
@@ -140,7 +146,7 @@ barchart(){
     .attr("height", y.bandwidth());
     svg.append("g")
     .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x));  
+    .call(d3.axisBottom(x));
 
     svg.append("g")
       .call(d3.axisLeft(y));
