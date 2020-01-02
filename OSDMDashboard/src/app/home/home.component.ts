@@ -191,7 +191,7 @@ private createChart(): void {
   const y = d3
     .scaleLinear()
     .rangeRound([contentHeight, 0])
-    .domain([0, d3.max(data, d => d.frequency)]);
+    .domain([0, d3.max(data,d => d.frequency)]);
 
   const g = svg.append('g')
     .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
