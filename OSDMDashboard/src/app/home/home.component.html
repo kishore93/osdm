@@ -4,29 +4,34 @@
 <br>
 <br>
 <div class="container-fluid">
-    <div class="row">
-        <div class='col-lg-5 offset-1'>
+    <a [routerLink]="['heatmapNav']" class="heatmapLink">Navigate to detailed view ></a>
+    <br>
+    <br>
+    <div class="row" style="width: 90%;margin:0 auto;">
+        <div class='col-lg-5' style="border: 1px solid #72a4d0;margin-left: 10%;">
+            <div class="svg-title">Top 10 materials with the highest demand across all plants</div>
             <div #svg1 id="svg1">
             </div>
         </div>  
-        <div class='col-lg-5 offset-1'>
+        <div class='col-lg-5' style="border: 1px solid #72a4d0;">
+            <div class="svg-title">E&O inv as a % of total inventory in each plant</div>
                 <div #chart id="chart"></div>
         </div>
     </div>
-    <div class="row">
-        <div class='col-lg-5 offset-1'>
+    <div class="row" style="width: 90%;margin:0 auto;">
+        <div class='col-lg-5' style="border: 1px solid #72a4d0;margin-left: 10%;">
             <br>
-        <svg width="700" height="350">
+        <div class="svg-title">E&O Inventory distribution in all plants</div>
+        <svg width="700" height="280">
             <g id="pie1" transform="translate(120, 140)"></g>
             <g id="pie2" transform="translate(400, 140)"></g>
         </svg>
         </div>
-        <div class='col-lg-5 offset-1'>
+        <div class='col-lg-5' style="border: 1px solid #72a4d0;">
             <br>
             <br>
+            <div class="svg-title">Actual inventory vs 30-day demand</div>
             <div #doublechart id="doublechart"></div>
         </div>
     </div>
-
-  <a [routerLink]="['heatmapNav']" class="heatmapLink">Navigate to detailed view</a>
 </div>

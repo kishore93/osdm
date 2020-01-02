@@ -115,11 +115,7 @@ barchart(){
           .padding(0.2);
   var x = d3.scaleLinear()
   .range([0, width]);
-  // var x = d3.scaleBand()
-  //   .range([0, 200])
-  //   .padding(0.1);
-  //   var y = d3.scaleLinear()
-  //   .range([300, 0]);
+  
   var svg = d3.select("#svg1").append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
@@ -149,27 +145,6 @@ barchart(){
     svg.append("g")
       .call(d3.axisLeft(y));
 }
-  // createChart1(){
-  //   const element = this.chartContainer1.nativeElement;
-  //   var width = 400, height = 200;
-
-  //   var data = [10, 15, 20, 25, 30];
-  //   var svg=d3.select("#svg1").append("svg")
-  //   .attr("width", element.offsetWidth)
-  //      .attr("height", height);
-  //   console.log(element.offsetHeight)
-  //   var scale = d3.scaleLinear()
-  //                 .domain([d3.min(data)-10, d3.max(data)+10])
-  //                 .range([height, 0]).nice();
-
-  //   var y_axis = d3.axisLeft(scale)
-                  
-
-  //   svg.append("g")
-  //      .attr("transform", "translate(50, 10)")
-  //      .call(y_axis);
-  
-  // }
  
 private createChart(): void {
   const element = this.chartContainer.nativeElement;
@@ -223,33 +198,6 @@ private createChart(): void {
       .attr('height', d => contentHeight - y(d.frequency));
 }
 
-// piechart(){
-// var width =600;
-// var height=500;
-// var svg=d3.select("#pie").append("svg").attr("width",width)
-// .attr("height",height)
-// var details=[
-//             {grade:"A+",number:8},
-//             {grade:"A",number:10},
-//             {grade:"B",number:18},
-//             {grade:"C",number:9},
-//             {grade:"D",number:4}
-//           ];
-// var data=d3.pie()
-// .value(function(d){return d["number"]})(details)
-// var colors=d3.scaleOrdinal(d3.schemePastel1)
-// var segments= d3.arc().innerRadius(0).outerRadius(200).padAngle(0.05).padRadius(50);
-// var sections= svg.datum(details).append("g").attr("transform","translate(250,250)").selectAll("path").data(data)
-// sections.enter().append("path").attr("d",segments).attr("fill",function(d){return colors(d.data.number);});
-
-// var content=d3.select("path").selectAll("text").data(data);
-// content.enter().append("text").each(function(d){
-//   console.log(d)
-//    var center= segments.centroid(d);
-//   // d3.select(this).attr("x",center[0]).attr("y",center[1])
-//   // .text(d.data.number).style("color","#fff")
-// })
-// }
 piechart1(){
   var arcGenerator = d3.arc()
 	.innerRadius(0)

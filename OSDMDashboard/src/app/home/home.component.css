@@ -28,3 +28,11 @@ text {
 .scctText{
     text-align: center;
 }
+
+.svg-title {
+  text-align: center;
+  margin-top: 5%;
+  font-size: 15px;
+  font-family: serif;
+  font-weight: bold;
+}
