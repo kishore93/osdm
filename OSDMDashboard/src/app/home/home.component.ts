@@ -106,10 +106,10 @@ piechart2(){
 }
 barchart(){
   const element=this.chartContainer1.nativeElement;
-  var data = [{"materialNo":"CNA504950","sales":59},{"materialNo":"CNA504951","sales":38},{"materialNo":"CNA504952","sales":21},{"materialNo":"CNA504953","sales":25},{"materialNo":"CNA504956","sales":30},{"materialNo":"CNA5049501","sales":47},{"materialNo":"CNA5049503","sales":5},{"materialNo":"CNA504951","sales":20},{"materialNo":"CNA5049509","sales":13},{"materialNo":"CNA5049505","sales":29}];
+  var data = [{"materialNo":"CNA504950","sales":10},{"materialNo":"CNA504951","sales":15},{"materialNo":"CNA504952","sales":23},{"materialNo":"CNA504953","sales":35},{"materialNo":"CNA504956","sales":48},{"materialNo":"CNA5049501","sales":56},{"materialNo":"CNA5049503","sales":67},{"materialNo":"CNA504987","sales":78},{"materialNo":"CNA5049509","sales":82},{"materialNo":"CNA5049505","sales":94}];
   var margin = {top: 20, right: 20, bottom: 30, left: 70};
   var   width = element.offsetWidth - margin.left - margin.right;
-  var   height = 200 - margin.top - margin.bottom;
+  var   height = 300 - margin.top - margin.bottom;
   var y = d3.scaleBand()
           .range([height, 0])
           .padding(0.2);
@@ -166,7 +166,7 @@ private createChart(): void {
   const y = d3
     .scaleLinear()
     .rangeRound([contentHeight, 0])
-    .domain([0, d3.max(data,d => d.frequency)]);
+    .domain([0, d3.max(data,d => d.frequency1)]);
     // console.log(y(50),contentHeight)
   const g = svg.append('g')
     .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
