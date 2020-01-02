@@ -10,7 +10,7 @@ text {
       stroke: white;
   }
   .heatmapLink{
-    width: 7%;
+    width: auto;
     text-decoration: underline;
     position: relative;
     float: right;

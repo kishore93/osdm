@@ -60,10 +60,10 @@ export class HeatMapComponent implements OnInit {
         this.obsoleteBoolean=true;
         this.obsoleteBooleanCheck="obsolete"
         if(i=="obsoleteValue"){
-          this.svgTitle2="E&O Inventory Absolute Value Report";
+          this.svgTitle2="E&O Inventory Obsolete Value Report";
         }
         if(i=="obsoleteQty"){
-          this.svgTitle2="E&O Inventory Absolute Quantity Report";
+          this.svgTitle2="E&O Inventory Obsolete Quantity Report";
         }
         
         this.svgTitle = '';
@@ -216,7 +216,7 @@ export class HeatMapComponent implements OnInit {
 
     var myColor = d3.scaleLinear().domain([minVal,maxVal])
     //remove this line and add after compiling
-    // .range(["#fff","red"]);
+    .range(["#fff","red"]);
                   
   
 
