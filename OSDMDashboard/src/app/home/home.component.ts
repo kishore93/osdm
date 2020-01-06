@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import * as d3 from 'd3'; 
 import { DataModel } from '../dataModel';
+import { color } from 'd3';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -50,7 +51,7 @@ export class HomeComponent implements OnInit {
     "frequency1": 300
 	}
 ]
-margin = {top: 20, right: 20, bottom: 30, left: 40};
+margin = {top: 20, right: 20, bottom: 50, left: 40};
   cities = [
     { name: 'London', population: 86},
     { name: 'New York', population: 80},
@@ -90,19 +91,29 @@ piechart2(){
   .attr('d', <any>arcGenerator)
   .attr("fill",function(d){return colors(<any>d.startAngle);});
 
-  d3.select('#pie2')
-	.selectAll('text')
-	.data(arcData)
-	.enter()
-	.append('text')
-	.each(function(d) {
-    var centroid = arcGenerator.centroid(<any>d);
-		d3.select(this)
-			.attr('x', centroid[0])
-			.attr('y', centroid[1])
-			.attr('dy', '0.33em')
-			.text(d.label).style("fill","white").style("font-size","10px");
-	});
+  // d3.select('#pie2')
+	// .selectAll('text')
+	// .data(arcData)
+	// .enter()
+	// .append('text')
+	// .each(function(d) {
+  //   var centroid = arcGenerator.centroid(<any>d);
+	// 	d3.select(this)
+	// 		.attr('x', centroid[0])
+	// 		.attr('y', centroid[1])
+	// 		.attr('dy', '0.33em')
+	// 		.text(d.label).style("fill","white").style("font-size","10px");
+  // });
+  
+  var legends=d3.select("#pie1").append("g").attr("transform","translate(400,10)")
+              .selectAll(".legends").data(arcData);
+  var legend=legends.enter().append('g').classed("legends",true)
+  .attr("transform",function(d,i){return "translate(0,"+(i+1)*30+")";});
+  legend.append("rect").attr("width",10).attr("height",10)
+  .attr("fill",function(d){return colors(<any>d.startAngle);});
+  legend.append("text").text(function(d){return " "+d.label})
+  .attr("x",12)
+  .attr("y",10)
 }
 barchart(){
   const element=this.chartContainer1.nativeElement;
@@ -129,7 +140,7 @@ barchart(){
   y.domain(data.map(function(d) { 
      return d.materialNo; }));
   
-  
+     
   svg.selectAll(".bar")
     .data(data)
     .enter().append("rect")
@@ -138,17 +149,21 @@ barchart(){
     .attr("width", function(d) {return x(d.sales); } )
     .attr("y", function(d) { return y(d.materialNo); })
     .attr("height", y.bandwidth());
-    svg.append("g")
+  
+  // svg.selectAll(".bar1").data(data)
+  // .enter()
+  // .append("text").text("am sumanth")
+  svg.append("g")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x));  
 
     svg.append("g")
       .call(d3.axisLeft(y));
+  
 }
  
 private createChart(): void {
   const element = this.chartContainer.nativeElement;
-  console.log(element)
   const data = this.data1;
 
   const svg = d3.select(element).append('svg')
@@ -157,7 +172,7 @@ private createChart(): void {
 
   const contentWidth = element.offsetWidth - this.margin.left - this.margin.right;
   const contentHeight = element.offsetHeight - this.margin.top - this.margin.bottom;
-
+  
   const x = d3
     .scaleBand()
     .rangeRound([0, contentWidth])
@@ -167,6 +182,16 @@ private createChart(): void {
     .scaleLinear()
     .rangeRound([contentHeight, 0])
     .domain([0, d3.max(data,d => d.frequency1)]);
+  // var line = d3.line()
+  // .x(function(d) { return x(d["frequency1"]) + x.bandwidth()/2; })
+  // .y(function(d) { return 400 - y(d["frequency"]); })
+  // svg.selectAll("path").data([data]).enter()
+  //   .append("path")
+  //   .attr("d", <any>line)
+  //   .style("stroke", "black")
+  //   .style("fill", "red");
+
+  
     // console.log(y(50),contentHeight)
   const g = svg.append('g')
     .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
@@ -196,6 +221,8 @@ private createChart(): void {
       .attr('y', d => y(d.frequency))
       .attr('width', x.bandwidth())
       .attr('height', d => contentHeight - y(d.frequency));
+
+  svg.append("text").text("PlantCode").attr("x",200).attr("y",element.offsetHeight-10).style("font-size","20px")
 }
 
 piechart1(){
@@ -218,19 +245,16 @@ piechart1(){
   .attr('d', <any>arcGenerator)
   .attr("fill",function(d){return colors(<any>d.startAngle);});;
 
-  d3.select('#pie1')
-	.selectAll('text')
-	.data(arcData)
-	.enter()
-	.append('text')
-	.each(function(d) {
-    var centroid = arcGenerator.centroid(<any>d);
-		d3.select(this)
-			.attr('x', centroid[0])
-			.attr('y', centroid[1])
-			.attr('dy', '0.33em')
-			.text(d.label).style("fill","white").style("font-size","10px");
-	});
+  
+  var legends=d3.select("#pie1").append("g").attr("transform","translate(120,40)")
+              .selectAll(".legends").data(arcData);
+  var legend=legends.enter().append('g').classed("legends",true)
+  .attr("transform",function(d,i){return "translate(0,"+(i+1)*30+")";});
+  legend.append("rect").attr("width",10).attr("height",10)
+  .attr("fill",function(d){return colors(<any>d.startAngle);});
+  legend.append("text").text(function(d){return " "+d.label})
+  .attr("x",12)
+  .attr("y",10)
 }
 
 
@@ -293,5 +317,6 @@ private createChartDouble(): void {
       .attr('y', d => y(d.frequency1))
       .attr('width', 20)
       .attr('height', d => contentHeight - y(d.frequency1));
+  svg.append("text").text("PlantCode").attr("x",200).attr("y",element.offsetHeight-10).style("font-size","20px")
 }
 }
