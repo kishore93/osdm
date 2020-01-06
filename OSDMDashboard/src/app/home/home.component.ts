@@ -91,7 +91,6 @@ piechart2(){
   .attr('d', <any>arcGenerator)
   .attr("fill",function(d){return colors(<any>d.startAngle);});
 
-<<<<<<< HEAD
   // d3.select('#pie2')
 	// .selectAll('text')
 	// .data(arcData)
@@ -115,27 +114,25 @@ piechart2(){
   legend.append("text").text(function(d){return " "+d.label})
   .attr("x",12)
   .attr("y",10)
-=======
-  d3.select('#pie2')
-	.selectAll('text')
-	.data(arcData)
-	.enter()
-	.append('text')
-	.each(function(d) {
-    var centroid = arcGenerator.centroid(<any>d);
-		d3.select(this)
-			.attr('x', centroid[0])
-			.attr('y', centroid[1])
-      .attr('dy', '0.33em')
+//   d3.select('#pie2')
+// 	.selectAll('text')
+// 	.data(arcData)
+// 	.enter()
+// 	.append('text')
+// 	.each(function(d) {
+//     var centroid = arcGenerator.centroid(<any>d);
+// 		d3.select(this)
+// 			.attr('x', centroid[0])
+// 			.attr('y', centroid[1])
+//       .attr('dy', '0.33em')
       
-			.text(d.label).style("fill","white").style("font-size","10px");
-  })
-  .attr("text-anchor", function(d) {
-    // are we past the center?
-    return (d.endAngle + d.startAngle)/2 > Math.PI ?
-        "end" : "start";
-});
->>>>>>> 8434338a33a484f100be1942dadc238f1d657566
+// 			.text(d.label).style("fill","white").style("font-size","10px");
+//   })
+//   .attr("text-anchor", function(d) {
+//     // are we past the center?
+//     return (d.endAngle + d.startAngle)/2 > Math.PI ?
+//         "end" : "start";
+// });
 }
 barchart(){
   const element=this.chartContainer1.nativeElement;
@@ -245,6 +242,14 @@ private createChart(): void {
       .attr('height', d => contentHeight - y(d.frequency));
 
   svg.append("text").text("PlantCode").attr("x",200).attr("y",element.offsetHeight-10).style("font-size","20px")
+  
+  var lineFunction = d3.line()
+                          .x(function(d,i) {console.log(d["frequency1"]); return d["frequency1"]; })
+                         .y(function(d,i) {console.log(i*10);return i*10 })
+  svg.append("path")
+  .data([data])
+  .attr("class", "line").style("fill","none").style("stroke","red").style("stroke-width","4px")
+  .attr("d", <any>lineFunction);
 }
 
 piechart1(){
@@ -339,6 +344,17 @@ private createChartDouble(): void {
       .attr('y', d => y(d.frequency1))
       .attr('width', 20)
       .attr('height', d => contentHeight - y(d.frequency1));
-  svg.append("text").text("PlantCode").attr("x",200).attr("y",element.offsetHeight-10).style("font-size","20px")
+  svg.append("text").text("PlantCode").attr("x",200).attr("y",element.offsetHeight-10).style("font-size","20px");
+  var legends=svg.append("g").attr("transform","translate(400,10)")
+  legends.append("rect").attr("width",10).attr("height",10)
+  .attr("fill","#d5f7da");
+  legends.append("text").text("Actual Inventory")
+  .attr("x",12)
+  .attr("y",10)
+  legends.append("rect").attr("width",10).attr("height",10).attr("y",20)
+  .attr("fill","#71af7f");
+  legends.append("text").text("Demand 30Days")
+  .attr("x",12)
+  .attr("y",30)
 }
 }
