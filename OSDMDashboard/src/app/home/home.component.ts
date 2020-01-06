@@ -91,6 +91,7 @@ piechart2(){
   .attr('d', <any>arcGenerator)
   .attr("fill",function(d){return colors(<any>d.startAngle);});
 
+<<<<<<< HEAD
   // d3.select('#pie2')
 	// .selectAll('text')
 	// .data(arcData)
@@ -114,6 +115,27 @@ piechart2(){
   legend.append("text").text(function(d){return " "+d.label})
   .attr("x",12)
   .attr("y",10)
+=======
+  d3.select('#pie2')
+	.selectAll('text')
+	.data(arcData)
+	.enter()
+	.append('text')
+	.each(function(d) {
+    var centroid = arcGenerator.centroid(<any>d);
+		d3.select(this)
+			.attr('x', centroid[0])
+			.attr('y', centroid[1])
+      .attr('dy', '0.33em')
+      
+			.text(d.label).style("fill","white").style("font-size","10px");
+  })
+  .attr("text-anchor", function(d) {
+    // are we past the center?
+    return (d.endAngle + d.startAngle)/2 > Math.PI ?
+        "end" : "start";
+});
+>>>>>>> 8434338a33a484f100be1942dadc238f1d657566
 }
 barchart(){
   const element=this.chartContainer1.nativeElement;
@@ -155,7 +177,7 @@ barchart(){
   // .append("text").text("am sumanth")
   svg.append("g")
     .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x));  
+    .call(d3.axisBottom(x));
 
     svg.append("g")
       .call(d3.axisLeft(y));
