@@ -73,7 +73,7 @@ ngOnInit() {
 piechart2(){
   var arcGenerator = d3.arc()
 	.innerRadius(0)
-  .outerRadius(120);
+  .outerRadius(100);
   var colors=d3.scaleOrdinal(d3.schemeDark2)
   var arcData = [
     {label: 'P0022', startAngle: 0, endAngle: 0.4},
@@ -243,19 +243,19 @@ private createChart(): void {
 
   svg.append("text").text("PlantCode").attr("x",200).attr("y",element.offsetHeight-10).style("font-size","20px")
   
-  var lineFunction = d3.line()
-                          .x(function(d,i) {console.log(d["frequency1"]); return d["frequency1"]; })
-                         .y(function(d,i) {console.log(i*10);return i*10 })
-  svg.append("path")
-  .data([data])
-  .attr("class", "line").style("fill","none").style("stroke","red").style("stroke-width","4px")
-  .attr("d", <any>lineFunction);
+  // var lineFunction = d3.line()
+  //                         .x(function(d,i) { return d["frequency1"]; })
+  //                        .y(function(d,i) {return i*10 })
+  // svg.append("path")
+  // .data([data])
+  // .attr("class", "line").style("fill","none").style("stroke","red").style("stroke-width","4px")
+  // .attr("d", <any>lineFunction);
 }
 
 piechart1(){
   var arcGenerator = d3.arc()
 	.innerRadius(0)
-  .outerRadius(120);
+  .outerRadius(100);
   var colors=d3.scaleOrdinal(d3.schemeDark2)
   var arcData = [
     {label: 'P0022', startAngle: 0, endAngle: 0.2},
@@ -338,7 +338,7 @@ private createChartDouble(): void {
     g.selectAll('.bar1')
     .data(data)
     .enter().append('rect')
-      .attr("fill", "#d5f7da")
+      .attr("fill", "green")
       .attr('class', 'bar1')
       .attr('x', d => 30+x(d.letter))
       .attr('y', d => y(d.frequency1))
@@ -347,7 +347,7 @@ private createChartDouble(): void {
   svg.append("text").text("PlantCode").attr("x",200).attr("y",element.offsetHeight-10).style("font-size","20px");
   var legends=svg.append("g").attr("transform","translate(400,10)")
   legends.append("rect").attr("width",10).attr("height",10)
-  .attr("fill","#d5f7da");
+  .attr("fill","green");
   legends.append("text").text("Actual Inventory")
   .attr("x",12)
   .attr("y",10)

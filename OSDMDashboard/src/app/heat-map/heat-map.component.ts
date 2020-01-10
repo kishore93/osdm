@@ -217,9 +217,6 @@ export class HeatMapComponent implements OnInit {
     var myColor = d3.scaleLinear().domain([minVal,maxVal])
     // .range(["#fff","red"]);
     //remove this line and add after compiling
-                  
-  
-
     var expensesAvgAmount = d3.nest()
     .key(function(d) { return d["region"]; })
     .key(function(d){ return d["state"]})

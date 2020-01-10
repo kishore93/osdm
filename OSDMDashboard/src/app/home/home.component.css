@@ -36,7 +36,13 @@ text {
   font-family: serif;
   font-weight: bold;
 }
-
+.row{
+  border: 3px solid lightsteelblue;
+    box-shadow: 0px 0px 5px 3px lightsteelblue;
+    margin-right: 0; 
+   margin-left: 0;
+   margin-bottom: 0%;
+}
 .pieChart-title{
   width: 100%;
   margin: 0 auto;
@@ -57,4 +63,18 @@ text {
   font-weight: bold;
   float: right;
   margin-right: 16%;
+}
+/* .bottomright{
+  border-left: 3px solid blue;
+} */
+.topRight {
+  border-left: 6px solid lightsteelblue;
+  box-shadow: 0px 0px 5px 3px lightsteelblue
+}
+.bottomRight{
+  border-left: 6px solid lightsteelblue;
+  box-shadow: 0px 0px 5px 3px lightsteelblue
+}
+.row2{
+  margin-bottom: 1%
 }
