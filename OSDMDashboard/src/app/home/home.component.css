@@ -1,6 +1,6 @@
 text {
-    font-family: "Helvetica Neue", Helvetica, sans-serif;
-    font-size: 12px;
+    font-family: "Calibri";
+    /* font-size: 12px; */
     font-weight: bold;
     fill: white;
     text-anchor: middle;
@@ -32,8 +32,15 @@ text {
 .svg-title {
   text-align: center;
   margin-top: 5%;
-  font-size: 15px;
-  font-family: serif;
+  /* font-size: 15px; */
+  font-family: "Calibri";
+  font-weight: bold;
+}
+.svg-title1{
+  text-align: center;
+   margin-bottom: 5%; 
+  /* font-size: 15px; */
+  font-family: "Calibri";
   font-weight: bold;
 }
 .row{
@@ -52,13 +59,13 @@ text {
   float: left;
     display: inline-block;
     margin-left: 13%;
-    font-size: 15px;
-    font-family: serif;
+    /* font-size: 15px; */
+    font-family: "Calibri";
     font-weight: bold;
 }
 .title-2{
-  font-size: 15px;
-  font-family: serif;
+  /* font-size: 15px; */
+  font-family: "Calibri";
   display: block;
   font-weight: bold;
   float: right;

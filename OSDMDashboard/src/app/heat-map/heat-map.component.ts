@@ -306,7 +306,7 @@ export class HeatMapComponent implements OnInit {
   rect.append("text")
       .attr("x","5")
       .attr("y","20")
-      .attr("font-family","New Century Schoolbook, serif")
+      .attr("font-family","Calibri")
       .attr("fill","#000")
       .attr("font-size","20px")
       .text(function(d) { return (d["materialNo"]); });

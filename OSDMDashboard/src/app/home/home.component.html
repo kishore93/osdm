@@ -9,8 +9,17 @@
     <br>
     <div class="row" >
         <div class='col-lg-5'>
-            <div class="svg-title">Top 10 materials with the highest demand across all plants</div>
-            <div #svg1 id="svg1"></div>
+                <div class="svg-title">E&O Inventory distribution in all plants</div>
+                <svg width="600" height="350">
+                    <g id="pie1" transform="translate(120, 140)"></g>
+                    
+                    <g id="pie2" transform="translate(400, 140)"></g>
+                </svg>
+                <div class="pieChart-title">
+                    <div class="title-1">E&O Value($)</div>
+                    <div class="title-2">E&O Units</div>
+                </div>
+            
         </div>  
         <div class='col-lg-6 offset-lg-1 topRight'>
             <div class="svg-title">E&O inv as a % of total inventory in each plant</div>
@@ -20,21 +29,13 @@
     <div class="row row2">
         <div class='col-lg-5'>
         <br>
-            <div class="svg-title">E&O Inventory distribution in all plants</div>
-            <svg width="600" height="350">
-                <g id="pie1" transform="translate(120, 140)"></g>
-                
-                <g id="pie2" transform="translate(400, 140)"></g>
-            </svg>
-            <div class="pieChart-title">
-                <div class="title-1">E&O Value($)</div>
-                <div class="title-2">E&O Units</div>
-            </div>
+            <div class="svg-title">Top 10 materials with the highest demand across all plants</div>
+            <div #svg1 id="svg1"></div>
         </div>
         <div class='col-lg-6 offset-lg-1 bottomRight' >
         <br>
         <br>
-            <div class="svg-title">Actual inventory vs 30-day demand</div>
+            <div class="svg-title1">Actual inventory vs 30-day demand</div>
             <div #doublechart id="doublechart" style="height:300px;"></div>
         </div>
     </div>

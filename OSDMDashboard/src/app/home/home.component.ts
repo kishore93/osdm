@@ -175,7 +175,7 @@ barchart(){
   svg.append("g")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x));
-
+    svg.append("text").text("Demand").attr("x",130).attr("y",280);
     svg.append("g")
       .call(d3.axisLeft(y));
   
@@ -214,6 +214,8 @@ private createChart(): void {
     // console.log(y(50),contentHeight)
   const g = svg.append('g')
     .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
+    svg.append("text").text("Total Inventory").style("font-size","15px").attr("x",-150).attr("y",12)
+    .attr('transform', 'rotate(-90)')
 
   g.append('g')
     .attr('class', 'axis axis--x')
@@ -238,10 +240,10 @@ private createChart(): void {
       .attr('class', 'bar')
       .attr('x', d => x(d.letter))
       .attr('y', d => y(d.frequency))
-      .attr('width', x.bandwidth())
+      .attr('width', x.bandwidth()-30)
       .attr('height', d => contentHeight - y(d.frequency));
 
-  svg.append("text").text("PlantCode").attr("x",200).attr("y",element.offsetHeight-10).style("font-size","20px")
+  svg.append("text").text("PlantCode").attr("x",200).attr("y",element.offsetHeight-10).style("font-size","15px").style("font-weight", "400")
   
   // var lineFunction = d3.line()
   //                         .x(function(d,i) { return d["frequency1"]; })
@@ -292,7 +294,8 @@ private createChartDouble(): void {
   const svg = d3.select(element).append('svg')
       .attr('width', element.offsetWidth)
       .attr('height', element.offsetHeight);
-
+      svg.append("text").text("Value").style("font-size","15px").attr("x",-150).attr("y",12)
+      .attr('transform', 'rotate(-90)')
   const contentWidth = element.offsetWidth - this.margin.left - this.margin.right;
   const contentHeight = element.offsetHeight - this.margin.top - this.margin.bottom;
 
@@ -344,7 +347,7 @@ private createChartDouble(): void {
       .attr('y', d => y(d.frequency1))
       .attr('width', 20)
       .attr('height', d => contentHeight - y(d.frequency1));
-  svg.append("text").text("PlantCode").attr("x",200).attr("y",element.offsetHeight-10).style("font-size","20px");
+  svg.append("text").text("PlantCode").attr("x",200).attr("y",element.offsetHeight-10).style("font-size","15px").style("font-weight", "400");
   var legends=svg.append("g").attr("transform","translate(400,10)")
   legends.append("rect").attr("width",10).attr("height",10)
   .attr("fill","green");
