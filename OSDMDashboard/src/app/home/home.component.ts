@@ -19,6 +19,17 @@ export class HomeComponent implements OnInit {
   constructor() { 
     
   }
+
+  tooltip = d3.select("body")
+    .append("div")
+    .attr("class","tooltip")
+    .style("position", "absolute")
+    .style("pointer-events","none")
+    .style("z-index", "40")
+    .style("visibility", "hidden")
+    .style("width", "auto")					
+    .style("height","auto")
+    .style("background-color","#D3D3D3");
  data1: DataModel[]=[
 	{
 		"letter": "P0020",
@@ -89,7 +100,16 @@ piechart2(){
 	.enter()
 	.append('path')
   .attr('d', <any>arcGenerator)
-  .attr("fill",function(d){return colors(<any>d.startAngle);});
+  .attr("fill",function(d){return colors(<any>d.startAngle);}).on("mouseover",mouseover);
+
+  function mouseover(d){
+    console.log(d)
+    console.log(d3.event.pageX)
+    console.log(d3.event.pageY)
+    d3.selectAll(".mouseover").remove()
+    d3.select('#pie2').append("text").attr("class","mouseover").text(d.label).attr("x",d3.event.pageX-450).attr("y",d3.event.pageY-300)
+    .attr("font-size","15px")
+  }
 
   // d3.select('#pie2')
 	// .selectAll('text')
@@ -158,7 +178,11 @@ barchart(){
   x.domain([0, d3.max(data, function(d){ return d.sales; })])
   y.domain(data.map(function(d) { 
      return d.materialNo; }));
-  
+function mouseover(d){
+    d3.selectAll(".mouseover").remove()
+    svg.append("text").attr("class","mouseover").text(d.sales).attr("x",x(d.sales)).attr("y",y(d.materialNo)+13)
+    .attr("font-size","15px")
+  }  
      
   svg.selectAll(".bar")
     .data(data)
@@ -167,15 +191,15 @@ barchart(){
     .attr("fill","#72a4d0")
     .attr("width", function(d) {return x(d.sales); } )
     .attr("y", function(d) { return y(d.materialNo); })
-    .attr("height", y.bandwidth());
-  
+    .attr("height", y.bandwidth())
+    .on("mouseover",mouseover)
   // svg.selectAll(".bar1").data(data)
   // .enter()
   // .append("text").text("am sumanth")
   svg.append("g")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x));
-    svg.append("text").text("Demand").attr("x",130).attr("y",280);
+    svg.append("text").text("Demand").attr("x",250).attr("y",280).style("font-size","15px").style("font-weight", "400")
     svg.append("g")
       .call(d3.axisLeft(y));
   
@@ -232,7 +256,11 @@ private createChart(): void {
       .attr('text-anchor', 'end')
       .text('Frequency');
 
-
+  function mouseover(d){
+    d3.selectAll(".mouseover").remove()
+    svg.append("text").attr("class","mouseover").text(d.frequency).attr("x",x(d.letter)+x.bandwidth()/2+10).attr("y",y(d.frequency)+15)
+    .attr("font-size","15px")
+  } 
   g.selectAll('.bar')
     .data(data)
     .enter().append('rect')
@@ -241,9 +269,10 @@ private createChart(): void {
       .attr('x', d => x(d.letter))
       .attr('y', d => y(d.frequency))
       .attr('width', x.bandwidth()-30)
-      .attr('height', d => contentHeight - y(d.frequency));
+      .attr('height', d => contentHeight - y(d.frequency))
+      .on("mouseover",mouseover)
 
-  svg.append("text").text("PlantCode").attr("x",200).attr("y",element.offsetHeight-10).style("font-size","15px").style("font-weight", "400")
+  svg.append("text").text("PlantCode").attr("x",300).attr("y",element.offsetHeight-10).style("font-size","15px").style("font-weight", "400")
   
   // var lineFunction = d3.line()
   //                         .x(function(d,i) { return d["frequency1"]; })
@@ -266,13 +295,22 @@ piechart1(){
     {label: 'P0025', startAngle: 1.4, endAngle: 3},
     {label: 'P0026', startAngle: 3, endAngle: 2* Math.PI}
   ];
+  function mouseover(d){
+    console.log(d)
+    console.log(d3.event.pageX)
+    console.log(d3.event.pageY)
+    d3.selectAll(".mouseover").remove()
+    d3.select('#pie1').append("text").attr("class","mouseover").text(d.label).attr("x",d3.event.pageX-150).attr("y",d3.event.pageY-300)
+    .attr("font-size","15px")
+  } 
   d3.select('#pie1')
 	.selectAll('path')
 	.data(arcData)
 	.enter()
 	.append('path')
   .attr('d', <any>arcGenerator)
-  .attr("fill",function(d){return colors(<any>d.startAngle);});;
+  .attr("fill",function(d){return colors(<any>d.startAngle);})
+  .on("mouseover",mouseover);;
 
   
   var legends=d3.select("#pie1").append("g").attr("transform","translate(120,40)")
@@ -337,7 +375,18 @@ private createChartDouble(): void {
       .attr('x', d => x(d.letter))
       .attr('y', d => y(d.frequency))
       .attr('width', 30)
-      .attr('height', d => contentHeight - y(d.frequency));
+      .attr('height', d => contentHeight - y(d.frequency))
+      .on("mouseover",mouseover1)
+  function mouseover1(d){
+    d3.selectAll(".mouseover").remove()
+    svg.append("text").attr("class","mouseover").text(d.frequency).attr("x",x(d.letter)+45).attr("y",y(d.frequency)+15)
+    .attr("font-size","10px").style("background-color","red");
+  }
+  function mouseover(d){
+    d3.selectAll(".mouseover").remove()
+    svg.append("text").attr("class","mouseover").text(d.frequency1).attr("x",x(d.letter)+75).attr("y",y(d.frequency1)+15)
+    .attr("font-size","10px")
+  }
     g.selectAll('.bar1')
     .data(data)
     .enter().append('rect')
@@ -345,9 +394,9 @@ private createChartDouble(): void {
       .attr('class', 'bar1')
       .attr('x', d => 30+x(d.letter))
       .attr('y', d => y(d.frequency1))
-      .attr('width', 20)
-      .attr('height', d => contentHeight - y(d.frequency1));
-  svg.append("text").text("PlantCode").attr("x",200).attr("y",element.offsetHeight-10).style("font-size","15px").style("font-weight", "400");
+      .attr('width', 30)
+      .attr('height', d => contentHeight - y(d.frequency1)).on("mouseover",mouseover);
+  svg.append("text").text("PlantCode").attr("x",300).attr("y",element.offsetHeight-10).style("font-size","15px").style("font-weight", "400");
   var legends=svg.append("g").attr("transform","translate(400,10)")
   legends.append("rect").attr("width",10).attr("height",10)
   .attr("fill","green");
