@@ -258,7 +258,7 @@ private createChart(): void {
 
   function mouseover(d){
     d3.selectAll(".mouseover").remove()
-    svg.append("text").attr("class","mouseover").text(d.frequency).attr("x",x(d.letter)+x.bandwidth()/2+10).attr("y",y(d.frequency)+15)
+    svg.append("text").attr("class","mouseover").text(d.frequency).attr("x",x(d.letter)+x.bandwidth()/2+20).attr("y",y(d.frequency)+15)
     .attr("font-size","15px")
   } 
   g.selectAll('.bar')
@@ -379,12 +379,12 @@ private createChartDouble(): void {
       .on("mouseover",mouseover1)
   function mouseover1(d){
     d3.selectAll(".mouseover").remove()
-    svg.append("text").attr("class","mouseover").text(d.frequency).attr("x",x(d.letter)+45).attr("y",y(d.frequency)+15)
+    svg.append("text").attr("class","mouseover").text(d.frequency).attr("x",x(d.letter)+65).attr("y",y(d.frequency)+15)
     .attr("font-size","10px").style("background-color","red");
   }
   function mouseover(d){
     d3.selectAll(".mouseover").remove()
-    svg.append("text").attr("class","mouseover").text(d.frequency1).attr("x",x(d.letter)+75).attr("y",y(d.frequency1)+15)
+    svg.append("text").attr("class","mouseover").text(d.frequency1).attr("x",x(d.letter)+95).attr("y",y(d.frequency1)+15)
     .attr("font-size","10px")
   }
     g.selectAll('.bar1')
