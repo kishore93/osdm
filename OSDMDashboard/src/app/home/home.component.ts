@@ -199,7 +199,7 @@ function mouseover(d){
   svg.append("g")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x));
-    svg.append("text").text("Demand").attr("x",250).attr("y",280).style("font-size","15px").style("font-weight", "400")
+    svg.append("text").text("Demand").attr("x",200).attr("y",280).style("font-size","15px").style("font-weight", "400")
     svg.append("g")
       .call(d3.axisLeft(y));
   
@@ -266,7 +266,7 @@ private createChart(): void {
     .enter().append('rect')
       .attr("fill", "#72a4d0")
       .attr('class', 'bar')
-      .attr('x', d => x(d.letter))
+      .attr('x', d => x(d.letter)+15)
       .attr('y', d => y(d.frequency))
       .attr('width', x.bandwidth()-30)
       .attr('height', d => contentHeight - y(d.frequency))
@@ -372,7 +372,7 @@ private createChartDouble(): void {
     .enter().append('rect')
       .attr("fill", "#71af7f")
       .attr('class', 'bar')
-      .attr('x', d => x(d.letter))
+      .attr('x', d => x(d.letter)+20)
       .attr('y', d => y(d.frequency))
       .attr('width', 30)
       .attr('height', d => contentHeight - y(d.frequency))
@@ -392,7 +392,7 @@ private createChartDouble(): void {
     .enter().append('rect')
       .attr("fill", "green")
       .attr('class', 'bar1')
-      .attr('x', d => 30+x(d.letter))
+      .attr('x', d => 50+x(d.letter))
       .attr('y', d => y(d.frequency1))
       .attr('width', 30)
       .attr('height', d => contentHeight - y(d.frequency1)).on("mouseover",mouseover);
