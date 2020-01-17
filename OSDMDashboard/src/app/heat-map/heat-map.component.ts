@@ -215,7 +215,7 @@ export class HeatMapComponent implements OnInit {
     .attr("transform", "translate(" + 5 + "," + 20 + ")");
 
     var myColor = d3.scaleLinear().domain([minVal,maxVal])
-    // .range(["#fff","red"]);
+    .range(["#fff","red"]);
     //remove this line and add after compiling
     var expensesAvgAmount = d3.nest()
     .key(function(d) { return d["region"]; })
@@ -306,9 +306,10 @@ export class HeatMapComponent implements OnInit {
   rect.append("text")
       .attr("x","5")
       .attr("y","20")
-      .attr("font-family","Calibri")
+      // .attr("font-family","inherit")
       .attr("fill","#000")
-      .attr("font-size","20px")
+      .attr("font-size","15px")
+      .attr("font-weight","100")
       .text(function(d) { return (d["materialNo"]); });
   
   var eachRect=singlerect
